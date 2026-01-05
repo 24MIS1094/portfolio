@@ -28,6 +28,7 @@ ul {
   padding-left: 20px;
 }
 
+/* CONTACT */
 .contact {
   text-align: center;
 }
@@ -43,19 +44,31 @@ ul {
   font-weight: 500;
 }
 
+/* ICONS */
 .icons a {
-  font-size: 30px;
+  font-size: 32px;
   margin: 0 15px;
-  color: #555;
-  transition: transform 0.3s, color 0.3s;
+  transition: transform 0.3s;
 }
 
-.icons a:hover {
-  transform: scale(1.2);
-  color: #000;
-}
-
-/* WhatsApp green */
+/* ORIGINAL BRAND COLORS */
 .fa-whatsapp {
   color: #25D366;
+}
+
+.fa-github {
+  color: #181717;
+}
+
+.fa-linkedin {
+  color: #0A66C2;
+}
+
+.fa-instagram {
+  color: #E4405F;
+}
+
+/* Hover effect */
+.icons a:hover {
+  transform: scale(1.2);
 }

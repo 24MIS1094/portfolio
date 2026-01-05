@@ -1,31 +1,61 @@
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: #eeeeee;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #ededed;
   color: #333;
 }
 
+/* HEADER */
 header {
-  background: #dcdcdc;
-  padding: 40px;
+  background: #d6d6d6;
   text-align: center;
+  padding: 50px 20px;
 }
 
+header h1 {
+  margin: 0;
+  font-size: 34px;
+}
+
+header p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #555;
+}
+
+/* SECTIONS */
 section {
-  background: #f7f7f7;
+  background: #f9f9f9;
+  max-width: 900px;
   margin: 30px auto;
   padding: 25px;
-  width: 85%;
   border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
 }
 
 h2 {
+  margin-bottom: 15px;
   color: #444;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
 }
 
+h3 {
+  margin-top: 10px;
+}
+
+/* LISTS */
 ul {
   padding-left: 20px;
+}
+
+ul li {
+  margin-bottom: 8px;
+}
+
+/* PROJECTS */
+.project {
+  margin-bottom: 20px;
 }
 
 /* CONTACT */
@@ -39,36 +69,32 @@ ul {
 }
 
 .phone a {
-  color: #333;
   text-decoration: none;
-  font-weight: 500;
+  color: #333;
 }
 
 /* ICONS */
 .icons a {
-  font-size: 32px;
+  font-size: 30px;
   margin: 0 15px;
   transition: transform 0.3s;
 }
 
-/* ORIGINAL BRAND COLORS */
-.fa-whatsapp {
-  color: #25D366;
-}
-
-.fa-github {
-  color: #181717;
-}
-
-.fa-linkedin {
-  color: #0A66C2;
-}
-
-.fa-instagram {
-  color: #E4405F;
-}
-
-/* Hover effect */
 .icons a:hover {
   transform: scale(1.2);
+}
+
+/* BRAND COLORS */
+.fa-whatsapp { color: #25D366; }
+.fa-github { color: #181717; }
+.fa-linkedin { color: #0A66C2; }
+.fa-instagram { color: #E4405F; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #d6d6d6;
+  margin-top: 40px;
+  font-size: 14px;
 }

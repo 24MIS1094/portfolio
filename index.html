@@ -3,29 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <title>Arjun | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Font Awesome -->
   <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Stylish Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div class="intro">
+  <h1 class="intro-arjun">Arjun</h1>
+</div>
+
+<div class="layer back"></div>
+<div class="layer mid"></div>
+<div class="layer front"></div>
+<div class="scroll-light"></div>
+<div class="grain"></div>
 <div class="cursor-glow"></div>
 
+<canvas id="snow"></canvas>
+
+<button id="muteBtn"><i class="fas fa-volume-up"></i></button>
+
+<!-- 🎵 MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3c7c2e8c6b.mp3" type="audio/mpeg">
+</audio>
+
+<main>
+
 <header>
-  <h1>
-    <span class="fname">Arjun</span>
-    <span class="lname">Yadavaram Neraniki</span>
+  <h1 class="full-name">
+    <span class="arjun">Arjun</span><br>
+    <span class="surname">Yadavaram Neraniki</span>
   </h1>
   <p>Backend Developer Intern | Java • Python</p>
 </header>
 
-<section>
+<section class="reveal">
   <h2>Career Objective</h2>
   <p>
     Motivated Integrated M.Tech Software Engineering student seeking a Backend Developer
@@ -34,96 +54,75 @@
   </p>
 </section>
 
-<section>
+<section class="reveal">
   <h2>Profile Summary</h2>
   <ul>
     <li>Backend-focused developer with strong project experience</li>
-    <li>Hands-on experience in role-based and database-driven systems</li>
-    <li>Strong understanding of backend workflows and data handling</li>
-    <li>Actively learning industry-standard backend practices</li>
+    <li>Hands-on experience in role-based systems</li>
+    <li>Strong understanding of backend workflows</li>
+    <li>Actively learning industry standards</li>
   </ul>
 </section>
 
-<section>
+<section class="reveal">
   <h2>Education</h2>
   <p><strong>Integrated M.Tech – Software Engineering</strong></p>
   <p>Vellore Institute of Technology, Chennai</p>
   <p>2023 – 2029</p>
 </section>
 
-<section>
+<section class="reveal">
   <h2>Technical Skills</h2>
   <p><strong>Languages:</strong> Java, Python</p>
-  <p><strong>Backend Frameworks:</strong> Flask, Django</p>
-  <p><strong>Web Technologies:</strong> HTML, CSS, JavaScript, JSP</p>
-  <p><strong>Databases:</strong> MySQL, SQLite, MongoDB</p>
-  <p><strong>Tools:</strong> Git, GitHub</p>
+  <p><strong>Frameworks:</strong> Flask, Django</p>
+  <p><strong>Databases:</strong> MySQL, MongoDB</p>
 </section>
 
-<section>
+<section class="reveal">
   <h2>Projects</h2>
 
-  <div class="project">
+  <div class="card tilt">
     <h3>Online Job Portal Management System</h3>
     <ul>
-      <li>Designed backend logic for job posting and applications</li>
-      <li>Implemented user authentication and role-based access</li>
-      <li>Integrated MySQL for data storage and retrieval</li>
-      <li>Focused on backend workflows and database operations</li>
+      <li>Backend logic & authentication</li>
+      <li>Role-based access</li>
+      <li>MySQL integration</li>
     </ul>
   </div>
 
-  <div class="project">
+  <div class="card tilt">
     <h3>Government Endowment Temple Management System</h3>
     <ul>
-      <li>Developed a system to manage temples and priests across states</li>
-      <li>Implemented role-based access for Admin, Government, Department, and Priest</li>
-      <li>Enabled photo uploads and public temple submissions</li>
-      <li>Built using Flask, MongoDB, HTML, CSS, and Bootstrap</li>
+      <li>Flask + MongoDB</li>
+      <li>Admin & public access</li>
+      <li>Photo uploads</li>
     </ul>
   </div>
-
 </section>
 
-<section>
-  <h2>Certifications</h2>
-  <ul>
-    <li>Google Cloud – Develop Serverless Applications on Cloud Run</li>
-    <li>Google Cloud – Skill Badge</li>
-    <li>Cybersecurity Analyst Job Simulation – Forage</li>
-    <li>Deloitte Cyber & Data Analytics Job Simulation – Forage</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Soft Skills</h2>
-  <ul>
-    <li>Problem Solving</li>
-    <li>Quick Learner</li>
-    <li>Team Collaboration</li>
-    <li>Attention to Detail</li>
-  </ul>
-</section>
-
-<section class="contact">
+<section class="reveal contact">
   <h2>Contact</h2>
 
-  <p class="phone">
-    <i class="fas fa-phone"></i>
-    <a href="tel:+919391143279">+91 93911 43279</a>
+  <p class="copy" data-copy="+919391143279">
+    <i class="fas fa-phone"></i> +91 93911 43279
+  </p>
+
+  <p class="copy" data-copy="get2yarjun@gmail.com">
+    <i class="fas fa-envelope"></i> get2yarjun@gmail.com
   </p>
 
   <div class="icons">
-    <a href="https://wa.me/919391143279" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://github.com/24MIS1094" target="_blank"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/arjun-yn-420bb731a" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="https://www.instagram.com/iam_always_arjun" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a class="icon whatsapp" href="https://wa.me/919391143279"><i class="fab fa-whatsapp"></i></a>
+    <a class="icon github" href="https://github.com/24MIS1094"><i class="fab fa-github"></i></a>
+    <a class="icon linkedin" href="https://www.linkedin.com/in/arjun-yn-420bb731a"><i class="fab fa-linkedin"></i></a>
+    <a class="icon instagram" href="https://www.instagram.com/iam_always_arjun"><i class="fab fa-instagram"></i></a>
   </div>
 </section>
 
-<footer>
-  © 2026 Arjun | Portfolio
-</footer>
+<footer>© 2026 Arjun | Portfolio</footer>
+<div id="toast">Copied ✔</div>
+
+</main>
 
 <script src="script.js"></script>
 </body>

@@ -1,75 +1,162 @@
 body{
   margin:0;
-  font-family:Inter,sans-serif;
-  background:#05060a;
-  color:#f5f5f7;
+  font-family:"Segoe UI", Arial, sans-serif;
+  background:#05050a;
+  color:#eaeaea;
   overflow-x:hidden;
 }
 
-.intro{
-  position:fixed;inset:0;
-  background:black;
+/* SNOW */
+#snow{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+}
+
+/* HERO */
+#hero{
+  height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  z-index:9999;
-  animation:out 1.2s ease forwards;
-  animation-delay:3s;
-}
-.intro-arjun{
-  font-family:Sacramento,cursive;
-  font-size:150px;
-  text-shadow:0 0 60px #7f5cff,0 0 150px #00f7ff;
-}
-@keyframes out{to{opacity:0;pointer-events:none}}
-
-.layer{position:fixed;inset:-20%;pointer-events:none}
-.back{background:radial-gradient(circle,#7f5cff33,transparent 60%)}
-.mid{background:radial-gradient(circle,#00f7ff22,transparent 60%)}
-
-.cursor-glow{
-  position:fixed;width:400px;height:400px;
-  background:radial-gradient(circle,rgba(255,255,255,.3),transparent 60%);
-  filter:blur(80px);
-  pointer-events:none;
-  transform:translate(-50%,-50%);
+  text-align:center;
+  position:relative;
+  z-index:2;
+  background:
+    radial-gradient(circle at top,rgba(120,140,255,0.18),transparent 60%),
+    linear-gradient(to bottom,#070712,#020205);
 }
 
-#snow{position:fixed;inset:0;pointer-events:none}
-
-#muteBtn{
-  position:fixed;top:20px;right:20px;
-  background:none;border:1px solid #555;
-  color:white;border-radius:50%;
-  padding:10px;z-index:9999;
+/* HERO NAME – CINEMATIC FLOAT + SHAKE */
+#hero-name{
+  font-size:76px;
+  margin:0;
+  animation:
+    fadeUp 1.2s ease forwards,
+    float 6s ease-in-out infinite,
+    microShake 3.5s infinite;
 }
 
-header{text-align:center;padding:180px 20px}
-.arjun{
-  font-family:Sacramento,cursive;
-  font-size:120px;
-  text-shadow:0 0 80px #7f5cff,0 0 160px #00f7ff;
+/* SURNAME WRAP */
+.surname-wrap{
+  margin-top:14px;
+  animation:
+    fadeUp 1.2s ease forwards,
+    float 7s ease-in-out infinite;
+  animation-delay:1.2s;
+  opacity:0;
+  animation-fill-mode:forwards;
 }
-.surname{letter-spacing:4px;color:#aaa}
 
+#hero-surname{
+  font-size:22px;
+  letter-spacing:6px;
+  margin:0;
+  color:#ccc;
+}
+
+/* FLOW LINE */
+.surname-line{
+  width:140px;
+  height:2px;
+  margin:10px auto 0;
+  background:linear-gradient(
+    90deg,
+    #6a7cff,
+    #9fd3ff,
+    #6a7cff
+  );
+  background-size:200% 100%;
+  animation:
+    flow 3s linear infinite,
+    microShake 4s infinite;
+  border-radius:2px;
+}
+
+#hero p{
+  margin-top:20px;
+  font-size:14px;
+  color:#bcbcbc;
+}
+
+/* SECTIONS */
 section{
-  max-width:900px;margin:100px auto;padding:50px;
-  background:rgba(255,255,255,.08);
-  border-radius:30px;
-  opacity:0;transform:translateY(80px);
+  max-width:900px;
+  margin:100px auto;
+  padding:40px;
+  background:rgba(255,255,255,0.06);
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.6);
+  opacity:0;
+  transform:translateY(80px);
   transition:1.2s ease;
 }
-section.visible{opacity:1;transform:none}
 
-.icons{display:flex;justify-content:center;gap:30px}
-.icon{font-size:36px}
-.whatsapp i{color:#25D366}
-.linkedin i{color:#0A66C2}
-
-#toast{
-  position:fixed;bottom:30px;left:50%;
-  transform:translateX(-50%);
-  background:black;padding:10px 20px;
-  opacity:0;border-radius:20px;
+section.visible{
+  opacity:1;
+  transform:translateY(0);
 }
-#toast.show{opacity:1}
+
+/* MICRO PARALLAX FEEL */
+section.visible{
+  animation:sectionFloat 10s ease-in-out infinite;
+}
+
+h2{
+  border-bottom:1px solid rgba(255,255,255,0.25);
+  padding-bottom:8px;
+}
+
+.project{margin-top:25px}
+
+/* CONTACT */
+.contact{text-align:center}
+
+.icons a{
+  font-size:30px;
+  margin:0 14px;
+}
+
+.fa-whatsapp{color:#25D366}
+.fa-github{color:#ffffff}
+.fa-linkedin{color:#0A66C2}
+.fa-instagram{color:#E4405F}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  color:#aaa;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+@keyframes flow{
+  from{background-position:0% 0;}
+  to{background-position:200% 0;}
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+/* VERY SUBTLE SHAKE */
+@keyframes microShake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(0.4px)}
+  40%{transform:translateX(-0.4px)}
+  60%{transform:translateX(0.3px)}
+  80%{transform:translateX(-0.3px)}
+}
+
+@keyframes sectionFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}

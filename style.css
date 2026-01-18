@@ -29,22 +29,15 @@ body{
     linear-gradient(to bottom,#070712,#020205);
 }
 
-/* HERO NAME – CINEMATIC FLOAT + SHAKE */
 #hero-name{
   font-size:76px;
   margin:0;
-  animation:
-    fadeUp 1.2s ease forwards,
-    float 6s ease-in-out infinite,
-    microShake 3.5s infinite;
+  animation:fadeUp 1.2s ease forwards, float 6s ease-in-out infinite;
 }
 
-/* SURNAME WRAP */
 .surname-wrap{
   margin-top:14px;
-  animation:
-    fadeUp 1.2s ease forwards,
-    float 7s ease-in-out infinite;
+  animation:fadeUp 1.2s ease forwards;
   animation-delay:1.2s;
   opacity:0;
   animation-fill-mode:forwards;
@@ -57,31 +50,15 @@ body{
   color:#ccc;
 }
 
-/* FLOW LINE */
 .surname-line{
   width:140px;
   height:2px;
   margin:10px auto 0;
-  background:linear-gradient(
-    90deg,
-    #6a7cff,
-    #9fd3ff,
-    #6a7cff
-  );
+  background:linear-gradient(90deg,#6a7cff,#9fd3ff,#6a7cff);
   background-size:200% 100%;
-  animation:
-    flow 3s linear infinite,
-    microShake 4s infinite;
-  border-radius:2px;
+  animation:flow 3s linear infinite;
 }
 
-#hero p{
-  margin-top:20px;
-  font-size:14px;
-  color:#bcbcbc;
-}
-
-/* SECTIONS */
 section{
   max-width:900px;
   margin:100px auto;
@@ -99,64 +76,38 @@ section.visible{
   transform:translateY(0);
 }
 
-/* MICRO PARALLAX FEEL */
-section.visible{
-  animation:sectionFloat 10s ease-in-out infinite;
+.cert-list{
+  list-style:none;
+  padding:0;
 }
 
-h2{
-  border-bottom:1px solid rgba(255,255,255,0.25);
-  padding-bottom:8px;
+.cert-list li{
+  margin:12px 0;
+  cursor:pointer;
+  color:#9fd3ff;
 }
 
-.project{margin-top:25px}
+.cert-list li:hover{
+  color:#fff;
+  text-shadow:0 0 10px rgba(160,200,255,0.6);
+}
 
-/* CONTACT */
 .contact{text-align:center}
+.icons a{font-size:30px;margin:0 14px}
 
-.icons a{
-  font-size:30px;
-  margin:0 14px;
-}
+footer{text-align:center;padding:30px;color:#aaa}
 
-.fa-whatsapp{color:#25D366}
-.fa-github{color:#ffffff}
-.fa-linkedin{color:#0A66C2}
-.fa-instagram{color:#E4405F}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:30px;
-  color:#aaa;
-}
-
-/* ANIMATIONS */
 @keyframes fadeUp{
-  from{opacity:0; transform:translateY(40px)}
-  to{opacity:1; transform:translateY(0)}
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 @keyframes flow{
-  from{background-position:0% 0;}
-  to{background-position:200% 0;}
+  from{background-position:0%}
+  to{background-position:200%}
 }
 
 @keyframes float{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-6px)}
-}
-
-/* VERY SUBTLE SHAKE */
-@keyframes microShake{
-  0%,100%{transform:translateX(0)}
-  20%{transform:translateX(0.4px)}
-  40%{transform:translateX(-0.4px)}
-  60%{transform:translateX(0.3px)}
-  80%{transform:translateX(-0.3px)}
-}
-
-@keyframes sectionFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-4px)}
 }

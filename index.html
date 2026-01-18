@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Arjun | Portfolio</title>
 
-  <!-- Font Awesome -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -12,10 +11,8 @@
 </head>
 <body>
 
-<!-- SNOW -->
 <canvas id="snow"></canvas>
 
-<!-- HERO -->
 <header id="hero">
   <h1 id="hero-name">Arjun</h1>
 
@@ -64,6 +61,7 @@
   <p><strong>Tools:</strong> Git, GitHub</p>
 </section>
 
+<!-- PROJECTS ADDED BACK -->
 <section class="reveal">
   <h2>Projects</h2>
 
@@ -80,12 +78,40 @@
   <div class="project">
     <h3>Government Endowment Temple Management System</h3>
     <ul>
-      <li>Developed a system to manage temples and priests</li>
-      <li>Implemented role-based access</li>
-      <li>Enabled photo uploads</li>
+      <li>Developed system to manage temples and priests across states</li>
+      <li>Implemented role-based access for Admin, Government, Department, Priest</li>
+      <li>Enabled photo uploads and public temple submissions</li>
       <li>Built using Flask, MongoDB, HTML, CSS, Bootstrap</li>
     </ul>
   </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="reveal">
+  <h2>Certifications</h2>
+  <ul class="cert-list">
+
+    <li onclick="openLink('https://www.skills.google/public_profiles/390b49e5-1357-4a2e-a6b0-a95fdd9c6e07/badges/21035098')">
+      Google Cloud – Develop Serverless Applications on Cloud Run
+    </li>
+
+    <li onclick="openLink('https://www.skills.google/public_profiles/390b49e5-1357-4a2e-a6b0-a95fdd9c6e07/badges/21082632')">
+      Google Cloud – Cloud Functions: 3 Ways
+    </li>
+
+    <li onclick="openPDF('certificates/forage-cyber.pdf')">
+      Cybersecurity Analyst Job Simulation – Forage
+    </li>
+
+    <li onclick="openPDF('certificates/deloitte-cyber.pdf')">
+      Deloitte Cyber & Data Analytics Job Simulation – Forage
+    </li>
+
+    <li onclick="openPDF('certificates/deloitte-tech.pdf')">
+      Deloitte Technology Job Simulation – Forage
+    </li>
+
+  </ul>
 </section>
 
 <section class="reveal contact">
@@ -97,16 +123,21 @@
   </p>
 
   <div class="icons">
-    <a href="https://wa.me/919391143279"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://github.com/24MIS1094"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/arjun-yn-420bb731a"><i class="fab fa-linkedin"></i></a>
-    <a href="https://www.instagram.com/iam_always_arjun"><i class="fab fa-instagram"></i></a>
+    <a href="https://wa.me/919391143279" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://github.com/24MIS1094" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/arjun-yn-420bb731a" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.instagram.com/iam_always_arjun" target="_blank"><i class="fab fa-instagram"></i></a>
   </div>
 </section>
 
 <footer>© 2026 Arjun | Portfolio</footer>
 
 </main>
+
+<script>
+  function openPDF(path){ window.open(path,"_blank"); }
+  function openLink(url){ window.open(url,"_blank"); }
+</script>
 
 <script src="script.js"></script>
 </body>

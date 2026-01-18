@@ -11,46 +11,45 @@ document.querySelectorAll(".reveal").forEach(sec=>{
   observer.observe(sec);
 });
 
-/* ❄️ FULL PAGE ANTI-GRAVITY + VORTEX SNOW */
-const canvas = document.getElementById("snow");
-const ctx = canvas.getContext("2d");
+/* ❄️ SNOW */
+const canvas=document.getElementById("snow");
+const ctx=canvas.getContext("2d");
 
 function resize(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
 }
 resize();
-window.addEventListener("resize", resize);
+addEventListener("resize",resize);
 
-const flakes = Array.from({length:200},()=>({
+const flakes=[...Array(200)].map(()=>({
   x:Math.random()*canvas.width,
   y:Math.random()*canvas.height,
-  r:Math.random()*1.6+0.4,
-  speed:Math.random()*0.35+0.15,
-  angle:Math.random()*Math.PI*2,
-  alpha:Math.random()*0.6+0.25
+  r:Math.random()*1.6+.4,
+  v:Math.random()*.35+.15,
+  a:Math.random()*Math.PI*2,
+  o:Math.random()*.6+.3
 }));
 
-function animateSnow(){
+(function snow(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-
   flakes.forEach(f=>{
     ctx.beginPath();
-    ctx.fillStyle = `rgba(255,255,255,${f.alpha})`;
+    ctx.fillStyle=`rgba(255,255,255,${f.o})`;
     ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
     ctx.fill();
-
-    f.y -= f.speed;
-    f.angle += 0.008;
-    f.x += Math.cos(f.angle)*0.28;
-
-    if(f.y < -10){
-      f.y = canvas.height + 10;
-      f.x = Math.random()*canvas.width;
+    f.y-=f.v;
+    f.a+=0.008;
+    f.x+=Math.cos(f.a)*0.28;
+    if(f.y<-10){
+      f.y=canvas.height+10;
+      f.x=Math.random()*canvas.width;
     }
   });
+  requestAnimationFrame(snow);
+})();
 
-  requestAnimationFrame(animateSnow);
+/* PDF OPEN */
+function openPDF(path){
+  window.open(path,"_blank");
 }
-
-animateSnow();

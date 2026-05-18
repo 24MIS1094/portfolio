@@ -27,6 +27,34 @@ const Projects = () => {
       animate="visible"
       variants={containerVariants}
     >
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-70">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.12),transparent_28%),linear-gradient(rgba(0,229,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(0,229,255,0.08)_1px,transparent_1px)] bg-[length:100%_100%,100%_28px,28px_100%]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),transparent_30%,transparent_70%,rgba(255,255,255,0.03))]" />
+        <motion.div
+          className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full border border-cyan-300/20 bg-cyan-400/5 shadow-[0_0_80px_rgba(0,229,255,0.22)]"
+          animate={{ scale: [1, 1.05, 1], opacity: [0.55, 0.9, 0.55] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <div className="absolute inset-5 rounded-full border border-cyan-200/35" />
+          <div className="absolute inset-12 rounded-full border border-cyan-100/30" />
+          <motion.div
+            className="absolute inset-0 rounded-full border border-yellow-300/35"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+          />
+          <motion.div
+            className="absolute inset-20 rounded-full bg-gradient-to-br from-cyan-200 via-white to-yellow-200 opacity-80 blur-sm"
+            animate={{ scale: [0.9, 1.08, 0.9] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </motion.div>
+        <motion.div
+          className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent"
+          animate={{ opacity: [0.2, 0.95, 0.2], scaleX: [0.92, 1, 0.92] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+
       {/* Cinematic Glass Shutter Intro */}
       <div className="absolute inset-0 z-[100] pointer-events-none flex flex-col justify-center items-center">
         {/* Top Shutter */}
@@ -58,11 +86,12 @@ const Projects = () => {
       {/* Spider-Man Neon Ambient Glows */}
       <div className="pointer-events-none absolute left-0 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/20 blur-[150px]"></div>
       <div className="pointer-events-none absolute right-0 bottom-0 h-[600px] w-[600px] translate-x-1/3 translate-y-1/3 rounded-full bg-cyan-600/15 blur-[150px]"></div>
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_center,transparent_0%,transparent_42%,rgba(0,0,0,0.55)_100%)]" />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
         
         {/* Page Header Area */}
-        <motion.div variants={itemVariants} className="mb-24 text-center flex flex-col items-center relative w-full h-[160px] justify-center">
+        <motion.div variants={itemVariants} className="mb-24 text-center flex flex-col items-center relative w-full h-[180px] justify-center">
           
           {/* Cinematic Massive Background Watermark */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
@@ -79,14 +108,18 @@ const Projects = () => {
           </div>
 
           {/* Interactive Foreground Title */}
-          <div className="relative z-10 text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/20 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-            PROJECTS
+          <div className="relative z-10 text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-100 to-yellow-200 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+            <span className="inline-block bg-gradient-to-r from-red-500 via-white to-cyan-300 bg-clip-text text-transparent">PROJECTS</span>
           </div>
 
-          <div className="absolute -bottom-8 flex items-center justify-center gap-6 w-full opacity-60">
-            <div className="h-[1px] w-32 bg-gradient-to-r from-transparent to-red-500/50"></div>
-            <div className="h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_20px_rgba(255,255,255,1)]"></div>
-            <div className="h-[1px] w-32 bg-gradient-to-l from-transparent to-cyan-500/50"></div>
+          <div className="absolute -bottom-10 flex items-center justify-center gap-6 w-full opacity-70">
+            <div className="h-[1px] w-32 bg-gradient-to-r from-transparent to-yellow-400/70"></div>
+            <motion.div
+              className="h-2.5 w-2.5 rounded-full bg-cyan-100 shadow-[0_0_20px_rgba(0,229,255,1),_0_0_40px_rgba(255,215,0,0.8)]"
+              animate={{ scale: [1, 1.35, 1] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <div className="h-[1px] w-32 bg-gradient-to-l from-transparent to-red-500/70"></div>
           </div>
 
         </motion.div>

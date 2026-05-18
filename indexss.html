@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arjun | Portfolio</title>
+
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+
+  <script>
+    tailwind = window.tailwind || {};
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['General Sans', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/framer-motion@11/dist/framer-motion.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'General Sans', sans-serif;
+      background: #000000;
+      overflow-x: hidden;
+    }
+
+    .hero-glow-btn {
+      position: relative;
+      overflow: hidden;
+      border-radius: 9999px;
+      border: 0.6px solid rgba(255, 255, 255, 1);
+      padding: 1px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-glow-btn::before {
+      content: "";
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 78%;
+      height: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+      filter: blur(9px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-glow-btn > span {
+      position: relative;
+      z-index: 2;
+      border-radius: 9999px;
+      padding: 11px 29px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes barFlow {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+
+    .name-flow-bar {
+      width: 180px;
+      height: 3px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, rgba(255,255,255,0), #86efac, #60a5fa, #f9a8d4, rgba(255,255,255,0));
+      background-size: 220% 100%;
+      animation: barFlow 2.4s linear infinite;
+      box-shadow: 0 0 12px rgba(96, 165, 250, 0.55);
+    }
+
+    @keyframes nameZoomIn {
+      0% { opacity: 0; transform: scale(0.88); filter: blur(3px); }
+      100% { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+
+    @keyframes barAppear {
+      0% { opacity: 0; transform: scaleX(0.4); }
+      100% { opacity: 1; transform: scaleX(1); }
+    }
+
+    .name-intro {
+      animation: nameZoomIn 1.2s ease-out forwards;
+      transform-origin: center;
+    }
+
+    .bar-intro {
+      opacity: 0;
+      animation: barAppear 1s ease-out 0.4s forwards;
+      transform-origin: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, memo, useEffect } = React;
+    const MotionLib = window.framerMotion || window.Motion || null;
+
+    const ChevronIcon = () => (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="opacity-90">
+        <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+
+    const NavLink = ({ label, href, isActive }) => (
+      <a
+        href={href}
+        className={`inline-flex items-center gap-[14px] text-[14px] font-medium transition-colors duration-200 hover:text-white ${isActive ? 'text-white' : 'text-white/95'}`}
+      >
+        <span>{label}</span>
+        <ChevronIcon />
+      </a>
+    );
+
+    const BackgroundLayer = memo(() => (
+      <>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="fixed left-0 top-0 z-0 h-full w-full object-cover"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260217_030345_246c0224-10a4-422c-b324-070b7c0eceda.mp4"
+        />
+        <div className="fixed inset-0 z-10 bg-black/50"></div>
+        <div className="fixed inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/65"></div>
+      </>
+    ));
+
+    const PanelShell = ({ title, children }) => (
+      <section className="mx-auto w-full max-w-5xl rounded-2xl border border-white/20 bg-black/45 p-6 text-left backdrop-blur-md md:p-8">
+        <h3 className="mb-4 text-xl font-semibold text-white">{title}</h3>
+        {children}
+      </section>
+    );
+
+    const AboutPanel = () => (
+      <PanelShell title="About">
+        <div className="grid gap-6">
+          <div>
+            <h4 className="mb-2 text-lg font-semibold text-white">Career Objective</h4>
+            <p className="text-[15px] leading-relaxed text-white/80">
+              Motivated Integrated M.Tech Software Engineering student seeking a Backend Developer internship to build scalable backend systems and database-driven applications using Java and Python while gaining real-world industry experience.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="mb-2 text-lg font-semibold text-white">Profile Summary</h4>
+            <ul className="list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-white/80">
+              <li>Backend-focused developer with strong project experience</li>
+              <li>Hands-on experience in role-based and database-driven systems</li>
+              <li>Strong understanding of backend workflows and data handling</li>
+              <li>Actively learning industry-standard backend practices</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-2 text-lg font-semibold text-white">Education</h4>
+            <p className="text-[15px] leading-relaxed text-white/80">Integrated M.Tech - Software Engineering</p>
+            <p className="text-[15px] leading-relaxed text-white/80">Vellore Institute of Technology, Chennai</p>
+            <p className="text-[15px] leading-relaxed text-white/80">2023 - 2029</p>
+          </div>
+        </div>
+      </PanelShell>
+    );
+
+    const ProjectsPanel = () => (
+      <PanelShell title="Projects">
+        <div className="space-y-4">
+          <div className="rounded-xl border border-white/15 bg-white/[0.03] p-4">
+            <h5 className="mb-2 text-base font-semibold text-white">Online Job Portal Management System</h5>
+            <ul className="list-disc space-y-1.5 pl-5 text-[15px] leading-relaxed text-white/80">
+              <li>Designed backend logic for job posting and applications</li>
+              <li>Implemented user authentication and role-based access</li>
+              <li>Integrated MySQL for data storage and retrieval</li>
+              <li>Focused on backend workflows and database operations</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-white/15 bg-white/[0.03] p-4">
+            <h5 className="mb-2 text-base font-semibold text-white">Government Endowment Temple Management System</h5>
+            <ul className="list-disc space-y-1.5 pl-5 text-[15px] leading-relaxed text-white/80">
+              <li>Developed system to manage temples and priests across states</li>
+              <li>Implemented role-based access for Admin, Government, Department, Priest</li>
+              <li>Enabled photo uploads and public temple submissions</li>
+              <li>Built using Flask, MongoDB, HTML, CSS, Bootstrap</li>
+            </ul>
+          </div>
+        </div>
+      </PanelShell>
+    );
+
+    const CertificatesPanel = () => {
+      const openPDF = (path) => window.open(path, '_blank');
+      const openLink = (url) => window.open(url, '_blank');
+
+      return (
+        <PanelShell title="Certificates">
+          <ul className="space-y-3">
+            <li>
+              <button
+                type="button"
+                onClick={() => openLink('https://www.skills.google/public_profiles/390b49e5-1357-4a2e-a6b0-a95fdd9c6e07/badges/21035098')}
+                className="w-full rounded-lg border border-white/15 bg-white/[0.02] px-4 py-3 text-left text-white/80 transition hover:bg-white/[0.06] hover:text-white"
+              >
+                Google Cloud - Develop Serverless Applications on Cloud Run
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => openLink('https://www.skills.google/public_profiles/390b49e5-1357-4a2e-a6b0-a95fdd9c6e07/badges/21082632')}
+                className="w-full rounded-lg border border-white/15 bg-white/[0.02] px-4 py-3 text-left text-white/80 transition hover:bg-white/[0.06] hover:text-white"
+              >
+                Google Cloud - Cloud Functions: 3 Ways
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => openPDF('certificates/forage-cyber.pdf')}
+                className="w-full rounded-lg border border-white/15 bg-white/[0.02] px-4 py-3 text-left text-white/80 transition hover:bg-white/[0.06] hover:text-white"
+              >
+                Cybersecurity Analyst Job Simulation - Forage
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => openPDF('certificates/deloitte-cyber.pdf')}
+                className="w-full rounded-lg border border-white/15 bg-white/[0.02] px-4 py-3 text-left text-white/80 transition hover:bg-white/[0.06] hover:text-white"
+              >
+                Deloitte Cyber & Data Analytics Job Simulation - Forage
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => openPDF('certificates/deloitte-tech.pdf')}
+                className="w-full rounded-lg border border-white/15 bg-white/[0.02] px-4 py-3 text-left text-white/80 transition hover:bg-white/[0.06] hover:text-white"
+              >
+                Deloitte Technology Job Simulation - Forage
+              </button>
+            </li>
+          </ul>
+        </PanelShell>
+      );
+    };
+
+    const SkillsPanel = () => (
+      <PanelShell title="Skills">
+        <div className="grid gap-3 text-[15px] leading-relaxed text-white/80">
+          <p><strong className="text-white">Languages:</strong> Java, Python</p>
+          <p><strong className="text-white">Backend Frameworks:</strong> Flask, Django</p>
+          <p><strong className="text-white">Web Technologies:</strong> HTML, CSS, JavaScript, JSP</p>
+          <p><strong className="text-white">Databases:</strong> MySQL, SQLite, MongoDB</p>
+          <p><strong className="text-white">Tools:</strong> Git, GitHub</p>
+        </div>
+      </PanelShell>
+    );
+
+    const ContactPanel = () => (
+      <PanelShell title="Contact">
+        <div className="grid gap-4 text-[15px] text-white/85">
+          <p>
+            <a className="text-white hover:text-white/80" href="tel:+919391143279">+91 93911 43279</a>
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <a className="text-white/80 hover:text-white" href="https://wa.me/919391143279" target="_blank" rel="noreferrer">WhatsApp</a>
+            <a className="text-white/80 hover:text-white" href="https://github.com/24MIS1094" target="_blank" rel="noreferrer">GitHub</a>
+            <a className="text-white/80 hover:text-white" href="https://www.linkedin.com/in/arjun-yn-420bb731a" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a className="text-white/80 hover:text-white" href="https://www.instagram.com/iam_always_arjun" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
+        </div>
+      </PanelShell>
+    );
+
+    const ActivePanel = ({ activePanel }) => {
+      const panels = {
+        about: <AboutPanel />,
+        projects: <ProjectsPanel />,
+        certificates: <CertificatesPanel />,
+        skills: <SkillsPanel />,
+        contact: <ContactPanel />
+      };
+
+      if (!activePanel) return null;
+
+      if (!MotionLib || !MotionLib.motion || !MotionLib.AnimatePresence) {
+        return (
+          <div key={activePanel} className="w-full animate-[fadeIn_.25s_ease-out]">
+            {panels[activePanel]}
+          </div>
+        );
+      }
+
+      const MDiv = MotionLib.motion.div;
+      const AP = MotionLib.AnimatePresence;
+
+      return (
+        <AP mode="wait">
+          <MDiv
+            key={activePanel}
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 14 }}
+            transition={{ duration: 0.28, ease: 'easeOut' }}
+            className="w-full"
+          >
+            {panels[activePanel]}
+          </MDiv>
+        </AP>
+      );
+    };
+
+    const HeroContent = ({ activePanel, phase }) => (
+      <section className="relative z-20 flex min-h-screen flex-col items-center px-6 pb-[102px] pt-[200px] text-center md:pt-[280px]">
+        <div className="flex w-full flex-col items-center gap-[40px]">
+          {phase !== 'intro' ? (
+            <div className="max-w-[680px]">
+              <h1
+                className="mx-auto max-w-[613px] text-[36px] font-medium leading-[1.28] text-transparent md:text-[56px] name-intro"
+                style={{ background: 'linear-gradient(144.5deg, #ffffff 28%, rgba(0,0,0,0) 115%)', WebkitBackgroundClip: 'text', backgroundClip: 'text' }}
+              >
+                Arjun Yn
+              </h1>
+
+              {phase === 'ready' ? <div className="mx-auto mt-4 name-flow-bar bar-intro"></div> : null}
+            </div>
+          ) : null}
+
+          {phase === 'ready' ? (
+            <div className="flex flex-wrap items-center justify-center gap-5 rounded-full border border-white/15 bg-black/35 px-5 py-3 backdrop-blur-sm md:gap-8 md:px-8">
+              <NavLink label="About" href="#about" isActive={activePanel === 'about'} />
+              <NavLink label="Projects" href="#projects" isActive={activePanel === 'projects'} />
+              <NavLink label="Certificates" href="#certificates" isActive={activePanel === 'certificates'} />
+              <NavLink label="Skills" href="#skills" isActive={activePanel === 'skills'} />
+              <NavLink label="Contact" href="#contact" isActive={activePanel === 'contact'} />
+            </div>
+          ) : null}
+
+          {phase === 'ready' ? <ActivePanel activePanel={activePanel} /> : null}
+        </div>
+      </section>
+    );
+
+    const App = () => {
+      const allowedPanels = ['about', 'projects', 'certificates', 'skills', 'contact'];
+      const getPanelFromHash = () => {
+        const hashValue = window.location.hash.replace('#', '').toLowerCase();
+        return allowedPanels.includes(hashValue) ? hashValue : null;
+      };
+
+      const [activePanel, setActivePanel] = useState(getPanelFromHash());
+      const [phase, setPhase] = useState('intro');
+
+      useEffect(() => {
+        const onHashChange = () => {
+          setActivePanel(getPanelFromHash());
+        };
+
+        window.addEventListener('hashchange', onHashChange);
+
+        const introTimer = setTimeout(() => {
+          setPhase('name');
+        }, 5000);
+
+        const readyTimer = setTimeout(() => {
+          setPhase('ready');
+        }, 6400);
+
+        return () => {
+          window.removeEventListener('hashchange', onHashChange);
+          clearTimeout(introTimer);
+          clearTimeout(readyTimer);
+        };
+      }, []);
+
+      return (
+        <main className="relative min-h-screen bg-[#010101] text-white font-sans">
+          <BackgroundLayer />
+
+          <div className="relative z-20">
+            <HeroContent activePanel={activePanel} phase={phase} />
+          </div>
+        </main>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

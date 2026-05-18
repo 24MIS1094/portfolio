@@ -1,9 +1,31 @@
+/* Cinematic Intro Sequence */
+window.addEventListener('DOMContentLoaded',()=>{
+  const overlay=document.getElementById('intro-overlay');
+  const profile=document.getElementById('intro-profile');
+  const name=document.getElementById('intro-name');
+  const surname=document.getElementById('intro-surname');
+  if(!overlay)return;
+  setTimeout(()=>{
+    profile.style.opacity=1;
+    profile.style.transform='scale(1)';
+  },700);
+  setTimeout(()=>{
+    name.style.opacity=1;
+    surname.style.opacity=1;
+  },1700);
+  setTimeout(()=>{
+    overlay.style.opacity=0;
+    overlay.style.pointerEvents='none';
+    setTimeout(()=>overlay.style.display='none',700);
+  },3200);
+});
 /* SCROLL REVEAL */
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       e.target.classList.add("visible");
     }
+
   });
 },{threshold:0.25});
 

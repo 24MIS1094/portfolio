@@ -27,31 +27,27 @@ const Projects = () => {
       animate="visible"
       variants={containerVariants}
     >
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-70">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.12),transparent_28%),linear-gradient(rgba(0,229,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(0,229,255,0.08)_1px,transparent_1px)] bg-[length:100%_100%,100%_28px,28px_100%]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),transparent_30%,transparent_70%,rgba(255,255,255,0.03))]" />
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-75">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,0,60,0.12),transparent_24%),linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(0,229,255,0.08)_1px,transparent_1px)] bg-[length:100%_100%,100%_24px,24px_100%]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,transparent_0%,transparent_34%,rgba(0,0,0,0.54)_74%,rgba(0,0,0,0.92)_100%)]" />
         <motion.div
-          className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full border border-cyan-300/20 bg-cyan-400/5 shadow-[0_0_80px_rgba(0,229,255,0.22)]"
-          animate={{ scale: [1, 1.05, 1], opacity: [0.55, 0.9, 0.55] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full border border-red-400/20 bg-red-500/5 shadow-[0_0_90px_rgba(255,0,60,0.24)]"
+          animate={{ scale: [1, 1.04, 1], opacity: [0.55, 0.92, 0.55] }}
+          transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
         >
           <div className="absolute inset-5 rounded-full border border-cyan-200/35" />
-          <div className="absolute inset-12 rounded-full border border-cyan-100/30" />
+          <div className="absolute inset-12 rounded-full border border-white/20" />
+          <div className="absolute inset-20 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.95),rgba(255,0,60,0.35),rgba(0,229,255,0.08))] opacity-90 blur-sm" />
           <motion.div
-            className="absolute inset-0 rounded-full border border-yellow-300/35"
+            className="absolute inset-0 rounded-full border border-cyan-300/30"
             animate={{ rotate: 360 }}
-            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-          />
-          <motion.div
-            className="absolute inset-20 rounded-full bg-gradient-to-br from-cyan-200 via-white to-yellow-200 opacity-80 blur-sm"
-            animate={{ scale: [0.9, 1.08, 0.9] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
           />
         </motion.div>
         <motion.div
-          className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent"
-          animate={{ opacity: [0.2, 0.95, 0.2], scaleX: [0.92, 1, 0.92] }}
-          transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent"
+          animate={{ opacity: [0.18, 0.9, 0.18], scaleX: [0.92, 1, 0.92] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         />
       </div>
 
@@ -81,7 +77,7 @@ const Projects = () => {
       </div>
 
       {/* Spider-Man Interactive Canvas Web */}
-      <SpiderWeb />
+      <SpiderWeb theme="spiderman" />
 
       {/* Spider-Man Neon Ambient Glows */}
       <div className="pointer-events-none absolute left-0 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/20 blur-[150px]"></div>
@@ -98,7 +94,7 @@ const Projects = () => {
             <h1 
               style={{ 
                 WebkitTextStroke: `4px #ff003c`, 
-                textShadow: `0 0 120px rgba(255,0,60,0.8), 0 0 40px rgba(255,0,60,0.8)`,
+                textShadow: `0 0 120px rgba(255,0,60,0.8), 0 0 40px rgba(0,229,255,0.55)`,
                 fontSize: `clamp(3rem, 15vw, 12rem)`
               }}
               className="font-black uppercase text-transparent tracking-tighter whitespace-nowrap drop-shadow-2xl opacity-30"
@@ -108,14 +104,14 @@ const Projects = () => {
           </div>
 
           {/* Interactive Foreground Title */}
-          <div className="relative z-10 text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-100 to-yellow-200 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-            <span className="inline-block bg-gradient-to-r from-red-500 via-white to-cyan-300 bg-clip-text text-transparent">PROJECTS</span>
+          <div className="relative z-10 text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-cyan-200 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+            <span className="inline-block bg-gradient-to-r from-red-500 via-white to-cyan-400 bg-clip-text text-transparent">PROJECTS</span>
           </div>
 
           <div className="absolute -bottom-10 flex items-center justify-center gap-6 w-full opacity-70">
-            <div className="h-[1px] w-32 bg-gradient-to-r from-transparent to-yellow-400/70"></div>
+            <div className="h-[1px] w-32 bg-gradient-to-r from-transparent to-cyan-400/70"></div>
             <motion.div
-              className="h-2.5 w-2.5 rounded-full bg-cyan-100 shadow-[0_0_20px_rgba(0,229,255,1),_0_0_40px_rgba(255,215,0,0.8)]"
+              className="h-2.5 w-2.5 rounded-full bg-white shadow-[0_0_20px_rgba(255,255,255,1),_0_0_40px_rgba(255,0,60,0.8)]"
               animate={{ scale: [1, 1.35, 1] }}
               transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
             />

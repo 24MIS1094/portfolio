@@ -45,12 +45,12 @@ const Navbar = () => {
         isHome && hidden ? '-translate-y-full' : 'translate-y-0'
       }`}
     >
-      <nav className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-6 text-white">
-        <NavLink to="/" className="text-lg font-semibold tracking-wide">
+      <nav className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between gap-6 overflow-x-auto px-4 text-white">
+        <NavLink to="/" className="shrink-0 text-base font-semibold tracking-wide">
           YN Portfolio
         </NavLink>
 
-        <div className="flex flex-wrap items-center gap-5 text-sm md:gap-7">
+        <div className="flex shrink-0 flex-nowrap items-center gap-5 text-sm">
           {navItems.map((item) => (
             <NavLink
               key={item.to}

@@ -12,8 +12,8 @@ const Certificates = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28, ease: 'easeOut' }}
     >
-      <div className="mx-auto w-full max-w-4xl rounded-2xl border border-white/20 bg-black/30 p-6 md:p-10">
-        <h1 className="text-3xl font-semibold md:text-4xl">Certificates</h1>
+      <div className="mx-auto w-full max-w-4xl rounded-2xl border border-white/20 bg-black/30 p-6">
+        <h1 className="text-3xl font-semibold">Certificates</h1>
 
         <ul className="mt-6 list-disc space-y-4 pl-5 text-white/85">
           <li>

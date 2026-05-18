@@ -44,14 +44,14 @@ const Home = () => {
         />
       </div>
 
-      <section className="relative z-20 mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center justify-center px-4 md:px-6">
+      <section className="relative z-20 mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center justify-center px-4">
         
         {/* Ultra-Premium Glassmorphic HUD Visor */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-3xl overflow-hidden rounded-[2.5rem] border border-white/[0.08] bg-black/40 p-8 py-14 md:p-16 backdrop-blur-[40px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),_0_30px_60px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center"
+          className="relative w-full max-w-3xl overflow-hidden rounded-[2.5rem] border border-white/[0.08] bg-black/40 p-8 py-14 backdrop-blur-[40px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),_0_30px_60px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center"
         >
           {/* Internal HUD Ambient Glows */}
           <div className="pointer-events-none absolute left-0 top-0 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/20 blur-[100px]"></div>
@@ -61,11 +61,11 @@ const Home = () => {
             
             <div className="relative inline-block group cursor-pointer mb-10">
               {/* Hyper-Modern Neon Spider-Man Bloom Aura */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-96 h-32 bg-white/0 blur-[80px] rounded-full z-10 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-gradient-to-r group-hover:from-red-600/50 group-hover:to-cyan-500/50 group-hover:scale-125"></div>
+              <div className="absolute top-1/2 left-1/2 h-32 w-full max-w-96 -translate-x-1/2 -translate-y-1/2 rounded-full z-10 bg-white/0 blur-[80px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-gradient-to-r group-hover:from-red-600/50 group-hover:to-cyan-500/50 group-hover:scale-125"></div>
 
               {/* The Name - Ultra Sharp, Cinematic Aesthetic */}
               <motion.h1 
-                className="relative z-20 text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:tracking-widest group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-red-500 group-hover:via-white group-hover:to-cyan-400 group-hover:drop-shadow-[0_0_40px_rgba(255,0,60,0.6)]"
+                className="relative z-20 text-5xl font-black uppercase tracking-tighter text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:tracking-widest group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-red-500 group-hover:via-white group-hover:to-cyan-400 group-hover:drop-shadow-[0_0_40px_rgba(255,0,60,0.6)]"
                 initial={{ opacity: 0, filter: "blur(20px)" }}
                 animate={{ opacity: 1, filter: "blur(0px)" }}
                 transition={{ delay: 2.0, duration: 1.2, ease: "easeOut" }}
@@ -79,7 +79,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.3, duration: 1.2, ease: "easeOut" }}
-              className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mt-2"
+              className="flex flex-wrap items-center justify-center gap-3 mt-2"
             >
               {skills.map((skill, index) => (
                 <div 

@@ -79,7 +79,7 @@ const Projects = () => {
           </div>
 
           {/* Interactive Foreground Title */}
-          <div className="relative z-10 text-6xl font-black md:text-7xl lg:text-8xl tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/20 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+          <div className="relative z-10 text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/20 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
             PROJECTS
           </div>
 
@@ -97,12 +97,12 @@ const Projects = () => {
           {/* Project 1: Neon Red Theme (Job Portal) */}
           <motion.section 
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-[2.5rem] border border-red-500/10 bg-gradient-to-br from-red-900/[0.05] to-transparent p-8 md:p-12 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(255,0,60,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-red-500/30 hover:shadow-[inset_0_1px_1px_rgba(255,0,60,0.2),_0_0_80px_rgba(255,0,60,0.15)] cursor-default"
+            className="group relative overflow-hidden rounded-[2.5rem] border border-red-500/10 bg-gradient-to-br from-red-900/[0.05] to-transparent p-8 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(255,0,60,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-red-500/30 hover:shadow-[inset_0_1px_1px_rgba(255,0,60,0.2),_0_0_80px_rgba(255,0,60,0.15)] cursor-default"
           >
             {/* Cinematic Shutter Sweep */}
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-red-500/[0.08] to-transparent -translate-x-[150%] skew-x-[-30deg] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[150%]"></div>
             
-            <div className="relative z-10 flex flex-col lg:flex-row items-start gap-10">
+            <div className="relative z-10 flex flex-col items-start gap-10">
               
               {/* Project Icon */}
               <div className="shrink-0 rounded-3xl border border-red-500/20 bg-red-500/5 p-6 text-red-500 shadow-[inset_0_1px_1px_rgba(255,0,60,0.2)] transition-all duration-500 group-hover:scale-110 group-hover:bg-red-500/10 group-hover:shadow-[0_0_40px_rgba(255,0,60,0.4)]">
@@ -145,11 +145,11 @@ const Projects = () => {
           {/* Project 2: Neon Cyan Theme (Temple System) */}
           <motion.section 
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-[2.5rem] border border-cyan-500/10 bg-gradient-to-br from-cyan-900/[0.05] to-transparent p-8 md:p-12 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(0,229,255,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-cyan-500/30 hover:shadow-[inset_0_1px_1px_rgba(0,229,255,0.2),_0_0_80px_rgba(0,229,255,0.15)] cursor-default"
+            className="group relative overflow-hidden rounded-[2.5rem] border border-cyan-500/10 bg-gradient-to-br from-cyan-900/[0.05] to-transparent p-8 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(0,229,255,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-cyan-500/30 hover:shadow-[inset_0_1px_1px_rgba(0,229,255,0.2),_0_0_80px_rgba(0,229,255,0.15)] cursor-default"
           >
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-cyan-500/[0.08] to-transparent -translate-x-[150%] skew-x-[-30deg] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[150%]"></div>
             
-            <div className="relative z-10 flex flex-col lg:flex-row items-start gap-10">
+            <div className="relative z-10 flex flex-col items-start gap-10">
               
               {/* Project Icon */}
               <div className="shrink-0 rounded-3xl border border-cyan-500/20 bg-cyan-500/5 p-6 text-cyan-400 shadow-[inset_0_1px_1px_rgba(0,229,255,0.2)] transition-all duration-500 group-hover:scale-110 group-hover:bg-cyan-500/10 group-hover:shadow-[0_0_40px_rgba(0,229,255,0.4)]">

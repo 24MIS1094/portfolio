@@ -53,7 +53,7 @@ const SpiderWeb = () => {
 
     const particles: Particle[] = [];
     // Adjust count based on screen size for performance
-    const particleCount = window.innerWidth < 768 ? 40 : 80;
+    const particleCount = 60;
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }

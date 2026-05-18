@@ -8,8 +8,8 @@ const Contact = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28, ease: 'easeOut' }}
     >
-      <div className="mx-auto w-full max-w-4xl rounded-2xl border border-white/20 bg-black/30 p-6 md:p-10">
-        <h1 className="text-3xl font-semibold md:text-4xl">Contact</h1>
+      <div className="mx-auto w-full max-w-4xl rounded-2xl border border-white/20 bg-black/30 p-6">
+        <h1 className="text-3xl font-semibold">Contact</h1>
 
         <div className="mt-6 space-y-3 text-white/85">
           <p>

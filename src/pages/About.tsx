@@ -87,7 +87,7 @@ const About = () => {
           </AnimatePresence>
 
           {/* Interactive Acronym Title - Cinematic Foreground */}
-          <div className="relative z-10 flex justify-center items-center gap-3 md:gap-5 text-6xl font-black md:text-7xl lg:text-8xl tracking-tight">
+          <div className="relative z-10 flex items-center justify-center gap-3 text-5xl font-black tracking-tight">
             {acronyms.map((item, i) => (
               <span
                 key={i}
@@ -116,17 +116,17 @@ const About = () => {
 
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="flex flex-col gap-8">
           
           {/* Glass Card 1: Career Objective */}
           <motion.section 
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-[2rem] border border-red-500/10 bg-gradient-to-br from-red-900/[0.05] to-transparent p-8 md:p-10 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(255,0,60,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-red-500/30 hover:shadow-[inset_0_1px_1px_rgba(255,0,60,0.2),_0_0_60px_rgba(255,0,60,0.15)] md:col-span-2 cursor-default"
+            className="group relative overflow-hidden rounded-[2rem] border border-red-500/10 bg-gradient-to-br from-red-900/[0.05] to-transparent p-8 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(255,0,60,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-red-500/30 hover:shadow-[inset_0_1px_1px_rgba(255,0,60,0.2),_0_0_60px_rgba(255,0,60,0.15)] cursor-default"
           >
             {/* Cinematic Shutter Sweep */}
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-red-500/[0.08] to-transparent -translate-x-[150%] skew-x-[-30deg] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[150%]"></div>
             
-            <div className="relative z-10 flex flex-col md:flex-row items-start gap-8">
+            <div className="relative z-10 flex flex-col items-start gap-8">
               <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-5 text-red-500 shadow-[inset_0_1px_1px_rgba(255,0,60,0.2)] transition-all duration-500 group-hover:scale-110 group-hover:bg-red-500/10 group-hover:shadow-[0_0_30px_rgba(255,0,60,0.4)]">
                 <svg className="h-10 w-10 drop-shadow-[0_0_10px_rgba(255,0,60,0.5)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -146,7 +146,7 @@ const About = () => {
           {/* Glass Card 2: Profile Summary */}
           <motion.section 
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-[2rem] border border-cyan-500/10 bg-gradient-to-br from-cyan-900/[0.05] to-transparent p-8 md:p-10 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(0,229,255,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-cyan-500/30 hover:shadow-[inset_0_1px_1px_rgba(0,229,255,0.2),_0_0_60px_rgba(0,229,255,0.15)] cursor-default"
+            className="group relative overflow-hidden rounded-[2rem] border border-cyan-500/10 bg-gradient-to-br from-cyan-900/[0.05] to-transparent p-8 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(0,229,255,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-cyan-500/30 hover:shadow-[inset_0_1px_1px_rgba(0,229,255,0.2),_0_0_60px_rgba(0,229,255,0.15)] cursor-default"
           >
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-cyan-500/[0.08] to-transparent -translate-x-[150%] skew-x-[-30deg] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[150%]"></div>
             
@@ -177,7 +177,7 @@ const About = () => {
           >
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-blue-500/[0.08] to-transparent -translate-x-[150%] skew-x-[-30deg] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[150%]"></div>
             
-            <div className="relative z-10 flex flex-col gap-8 h-full">
+            <div className="relative z-10 flex h-full flex-col gap-8">
               <div className="inline-flex w-fit rounded-2xl border border-blue-500/20 bg-blue-500/5 p-5 text-blue-400 shadow-[inset_0_1px_1px_rgba(59,130,246,0.2)] transition-all duration-500 group-hover:scale-110 group-hover:bg-blue-500/10 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]">
                 <svg className="h-10 w-10 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="M12 14l9-5-9-5-9 5 9 5z" strokeLinejoin="round" strokeWidth={1.5} />

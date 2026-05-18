@@ -63,7 +63,40 @@ const Contact: React.FC = () => {
     >
       <section className="mx-auto w-full max-w-3xl rounded-2xl border border-white/10 bg-black/30 p-6 shadow-lg">
         <h1 className="text-3xl font-semibold mb-4">Contact</h1>
-        <p className="text-sm text-white/60 mb-6">Send me a message — I usually reply within a few days.</p>
+        <p className="text-sm text-white/60 mb-4">Send me a message — I usually reply within a few days.</p>
+
+        <div className="mb-6 space-y-2 text-white/85">
+          <p>
+            Phone:{' '}
+            <a className="underline decoration-white/40 underline-offset-4 hover:text-white" href="tel:+919391143279">
+              +91 93911 43279
+            </a>
+          </p>
+          <p>
+            WhatsApp:{' '}
+            <a className="underline decoration-white/40 underline-offset-4 hover:text-white" href="https://wa.me/919391143279" target="_blank" rel="noreferrer">
+              Chat on WhatsApp
+            </a>
+          </p>
+          <p>
+            GitHub:{' '}
+            <a className="underline decoration-white/40 underline-offset-4 hover:text-white" href="https://github.com/24MIS1094" target="_blank" rel="noreferrer">
+              github.com/24MIS1094
+            </a>
+          </p>
+          <p>
+            LinkedIn:{' '}
+            <a className="underline decoration-white/40 underline-offset-4 hover:text-white" href="https://www.linkedin.com/in/arjun-yn-420bb731a" target="_blank" rel="noreferrer">
+              /in/arjun-yn-420bb731a
+            </a>
+          </p>
+          <p>
+            Instagram:{' '}
+            <a className="underline decoration-white/40 underline-offset-4 hover:text-white" href="https://www.instagram.com/iam_always_arjun" target="_blank" rel="noreferrer">
+              @iam_always_arjun
+            </a>
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

@@ -55,6 +55,7 @@ const VideoPlayer = ({ src, className }: VideoPlayerProps) => {
   return (
     <video
       ref={videoRef}
+      src={src.endsWith('.mp4') ? src : undefined}
       className={className}
       autoPlay
       muted

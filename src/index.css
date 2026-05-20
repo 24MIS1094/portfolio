@@ -1,19 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Oxanium:wght@800&family=Syne:wght@800&family=Syncopate:wght@700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'General Sans', 'Outfit', system-ui, -apple-system, sans-serif;
   color-scheme: dark;
+  scroll-behavior: smooth;
+  --neon-cyan: #00f0ff;
+  --neon-magenta: #ff007f;
+  --neon-purple: #ab00ff;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.arjun-title-glow {
+  font-family: 'Oxanium', 'Syne', 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #8a9597 0%, #cbd5e1 33%, #ff5f1f 66%, #00f0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+  filter: drop-shadow(0 0 20px rgba(138, 149, 151, 0.35)) drop-shadow(0 0 8px rgba(255, 95, 31, 0.25));
+  text-shadow: none;
 }
 
 html,
 body,
 #root {
   min-height: 100%;
+  background-color: #020202;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  background: #000000;
+  background: #020202;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- EXCELLENCE CSS: Advanced Neon Text & Border Glows --- */
+.neon-text-cyan {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4), 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.neon-text-magenta {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 0, 127, 0.4), 0 0 20px rgba(255, 0, 127, 0.2);
+}
+
+.neon-glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15), inset 0 0 10px rgba(0, 240, 255, 0.05);
+}
+
+.neon-glow-magenta {
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.15), inset 0 0 10px rgba(255, 0, 127, 0.05);
+}
+
+.neon-glow-purple {
+  box-shadow: 0 0 25px rgba(171, 0, 255, 0.2), inset 0 0 12px rgba(171, 0, 255, 0.08);
+}
+
+/* Custom premium cyber scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #020202;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.15);
+  border-radius: 9999px;
+  border: 1px solid #020202;
+  transition: all 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 0, 127, 0.3);
+}
+
+/* Smooth layout animations */
+@keyframes borderGlowRotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-border-glow {
+  animation: borderGlowRotation 6s linear infinite;
+}
+
+/* Water flow gradient bar under title */
+@keyframes barFlow {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.name-flow-bar {
+  width: 180px;
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), #86efac, #60a5fa, #f9a8d4, rgba(255,255,255,0));
+  background-size: 220% 100%;
+  animation: barFlow 2.4s linear infinite;
+  box-shadow: 0 0 16px rgba(96, 165, 250, 0.7);
+}
+
+/* --- HIGH-END CINEMATIC GAMING GRAPHICS STYLING --- */
+
+@keyframes gridTravel {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+.cyber-grid-3d {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center top;
+  transform: perspective(500px) rotateX(60deg) scale(2.2);
+  transform-origin: center top;
+  opacity: 0.35;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 85%);
+  animation: gridTravel 24s linear infinite;
+  pointer-events: none;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-grid-3d-overdrive {
+  background-image: 
+    linear-gradient(rgba(251, 191, 36, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(251, 191, 36, 0.15) 1px, transparent 1px);
+  animation: gridTravel 8s linear infinite;
+  opacity: 0.55;
+  transform: perspective(400px) rotateX(65deg) scale(2.4);
+}
+
+@keyframes laserSweep {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+.laser-scanner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  box-shadow: 0 0 12px var(--neon-cyan);
+  opacity: 0.6;
+  pointer-events: none;
+  animation: laserSweep 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.laser-scanner-magenta {
+  background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent);
+  box-shadow: 0 0 12px var(--neon-magenta);
+  animation-duration: 3s;
+}
+
+.laser-scanner-gold {
+  background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+  box-shadow: 0 0 12px #fbbf24;
+  animation-duration: 2s;
+}
+
+/* Hologram blueprint panel overlay grid */
+.hologram-mesh {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.7) 100%);
+  pointer-events: none;
+}
+
+.hologram-mesh::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 240, 255, 0.15) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  opacity: 0.18;
+  mask-image: radial-gradient(circle at center, white 30%, transparent 80%);
+}
+
+/* Tech HUD Brackets */
+.hud-bracket-tl {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid var(--neon-cyan);
+  border-left: 2px solid var(--neon-cyan);
+  border-top-left-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.hud-bracket-tr {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid var(--neon-cyan);
+  border-right: 2px solid var(--neon-cyan);
+  border-top-right-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.hud-bracket-bl {
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  width: 14px;
+  height: 14px;
+  border-bottom: 2px solid var(--neon-cyan);
+  border-left: 2px solid var(--neon-cyan);
+  border-bottom-left-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.hud-bracket-br {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 14px;
+  height: 14px;
+  border-bottom: 2px solid var(--neon-cyan);
+  border-right: 2px solid var(--neon-cyan);
+  border-bottom-right-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Overdrive dynamic theme overrides */
+.border-overdrive {
+  border-color: rgba(251, 191, 36, 0.45) !important;
+}
+
+.text-overdrive {
+  color: #fbbf24 !important;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.6) !important;
+}
+
+.bg-overdrive {
+  background-color: rgba(251, 191, 36, 0.12) !important;
+}
+
+.shadow-overdrive {
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.3) !important;
+}
+
+/* --- WORLD-CLASS EDITORIAL & GENERATIVE UI ADDITIONS --- */
+
+.editorial-title {
+  font-family: 'General Sans', 'Outfit', 'Playfair Display', sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.hud-hairline {
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.hud-hairline-glow {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.25);
+}
+
+/* Interactive compass dial rotating dynamically */
+@keyframes compassSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-compass {
+  animation: compassSpin 20s linear infinite;
+}
+
+/* Luxury liquid ripple mask overlay */
+@keyframes liquidWave {
+  0% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; }
+  50% { border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%; }
+  100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; }
+}
+.liquid-fluid-aura {
+  animation: liquidWave 8s ease-in-out infinite;
 }

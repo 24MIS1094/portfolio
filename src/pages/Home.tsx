@@ -407,7 +407,7 @@ const HUDClock = ({ constraintsRef }: HUDClockProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.75, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="absolute left-[calc(100%-13rem)] md:left-[calc(100%-14.5rem)] top-[30%] md:top-[40%] z-30 group flex flex-col items-center gap-4 bg-zinc-955/90 border-2 border-zinc-800 p-5 rounded-none shadow-[0_15px_45px_rgba(0,0,0,0.85)] select-none w-48 pointer-events-auto backdrop-blur-md cursor-grab active:cursor-grabbing hover:shadow-[0_0_35px_rgba(0,240,255,0.25)] transition-all duration-300"
+      className="absolute left-[calc(100%-15rem)] md:left-[calc(100%-16.5rem)] top-[30%] md:top-[40%] z-30 group flex flex-col items-center gap-4 bg-zinc-950/95 border-2 border-zinc-700 p-5 rounded-none shadow-[0_15px_45px_rgba(0,0,0,0.85)] select-none w-56 pointer-events-auto backdrop-blur-md cursor-grab active:cursor-grabbing hover:shadow-[0_0_35px_rgba(0,240,255,0.25)] transition-all duration-300"
     >
       {/* Analog clock dial face - "Simply Empty" (No dots or markers) */}
       <div className="relative w-28 h-28 rounded-full border-[4px] border-zinc-900 flex items-center justify-center bg-[#09090b] shadow-[inset_0_0_18px_rgba(0,0,0,0.95),_0_0_12px_rgba(0,0,0,0.5)]">
@@ -433,8 +433,8 @@ const HUDClock = ({ constraintsRef }: HUDClockProps) => {
       {/* Digital clock & badge readouts */}
       <div className="flex flex-col items-center gap-3 w-full font-mono">
         <div
-          className={`flex items-baseline font-bold tracking-wider text-white justify-center transition-all duration-300 ${
-            isHovered ? "text-[17px] md:text-[18px]" : "text-[14px] md:text-[15px]"
+          className={`flex items-baseline font-extrabold tracking-widest text-white justify-center transition-all duration-300 ${
+            isHovered ? "text-[24px]" : "text-[20px]"
           }`}
         >
           <span className="text-white">{pad(hrs12)}</span>
@@ -445,7 +445,7 @@ const HUDClock = ({ constraintsRef }: HUDClockProps) => {
           <span className="text-white/45 px-[0.5px]">:</span>
           <span
             className="text-cyan-400 w-7 text-left transition-all duration-300"
-            style={{ fontSize: isHovered ? "12px" : "10px" }}
+            style={{ fontSize: isHovered ? "15px" : "12px" }}
           >
             {pad(ms, 3)}
           </span>
@@ -453,20 +453,20 @@ const HUDClock = ({ constraintsRef }: HUDClockProps) => {
 
         {/* Date badge */}
         <div
-          className={`font-bold text-cyan-300 bg-cyan-300/10 px-3 py-1 border border-cyan-300/35 uppercase text-center transition-all duration-300 ${
-            isHovered ? "text-[10.5px] tracking-[0.14em] px-3.5" : "text-[9.5px] tracking-wider"
+          className={`font-extrabold text-cyan-300 bg-cyan-300/10 px-4 py-1.5 border border-cyan-300/35 uppercase text-center transition-all duration-300 ${
+            isHovered ? "text-[12.5px] tracking-[0.14em] px-4.5" : "text-[11.5px] tracking-wider"
           }`}
         >
           {dateStr}
         </div>
 
         {/* AM/PM indicator */}
-        <div className="text-[9px] font-extrabold tracking-widest text-[#ff5f1f] bg-[#ff5f1f]/10 px-3.5 py-0.5 border border-[#ff5f1f]/35 uppercase">
+        <div className="text-[10px] font-extrabold tracking-widest text-[#ff5f1f] bg-[#ff5f1f]/10 px-4 py-1 border border-[#ff5f1f]/35 uppercase">
           {ampm}
         </div>
 
         <div className="h-px w-full bg-white/10 mt-1.5" />
-        <div className="text-[5.5px] text-white/20 uppercase tracking-widest mt-0.5 group-hover:text-white/50 transition-colors">
+        <div className="text-[6px] text-white/25 uppercase tracking-widest mt-0.5 group-hover:text-white/60 transition-colors">
           [DRAG TO MOVE]
         </div>
       </div>
@@ -576,7 +576,7 @@ const Home = () => {
                 {activeReveal && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.85, filter: "blur(15px)", y: 15 }}
-                    animate={{ opacity: 0.22, scale: 1, filter: "blur(0px)", y: 0 }}
+                    animate={{ opacity: 0.65, scale: 1, filter: "blur(0px)", y: 0 }}
                     exit={{ opacity: 0, scale: 1.05, filter: "blur(15px)", y: -15 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
@@ -584,14 +584,15 @@ const Home = () => {
                   >
                     <h1
                       style={{
-                        WebkitTextStroke: activeReveal === "yadavaram" ? "3px #ff5f1f" : "3px #00f0ff",
+                        WebkitTextStroke: activeReveal === "yadavaram" ? "5px #ff5f1f" : "5px #00f0ff",
                         textShadow: activeReveal === "yadavaram"
-                          ? "0 0 80px rgba(255, 95, 31, 0.45), 0 0 30px rgba(255, 95, 31, 0.2)"
-                          : "0 0 80px rgba(0, 240, 255, 0.45), 0 0 30px rgba(0, 240, 255, 0.2)",
-                        fontSize: "clamp(2.5rem, 11vw, 8rem)",
-                        letterSpacing: "0.15em"
+                          ? "0 0 60px rgba(255, 95, 31, 0.7), 0 0 20px rgba(255, 95, 31, 0.4)"
+                          : "0 0 60px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.4)",
+                        fontSize: "clamp(2.5rem, 11vw, 8.5rem)",
+                        letterSpacing: "0.15em",
+                        color: activeReveal === "yadavaram" ? "#ff5f1f" : "#00f0ff"
                       }}
-                      className="font-black uppercase text-transparent tracking-widest whitespace-nowrap drop-shadow-2xl font-sans"
+                      className="font-black uppercase tracking-widest whitespace-nowrap drop-shadow-2xl font-sans"
                     >
                       {activeReveal === "yadavaram" ? "YADAVARAM" : "NERANIKI"}
                     </h1>

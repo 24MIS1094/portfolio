@@ -388,7 +388,7 @@ const HUDClock = ({ constraintsRef }: HUDClockProps) => {
   return (
     <motion.div
       drag={true}
-      dragConstraints={false} // Frictionless, unrestricted free dragging unlocked!
+      dragConstraints={constraintsRef}
       dragMomentum={true}
       dragElastic={0.22}
       style={{ x, y }}
@@ -407,7 +407,7 @@ const HUDClock = ({ constraintsRef }: HUDClockProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.75, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="absolute right-4 md:right-10 top-[30%] md:top-[40%] z-30 group flex flex-col items-center gap-4 bg-zinc-955/90 border-2 border-zinc-800 p-5 rounded-none shadow-[0_15px_45px_rgba(0,0,0,0.85)] select-none w-48 pointer-events-auto backdrop-blur-md cursor-grab active:cursor-grabbing hover:shadow-[0_0_35px_rgba(0,240,255,0.25)] transition-all duration-300"
+      className="absolute left-[calc(100%-13rem)] md:left-[calc(100%-14.5rem)] top-[30%] md:top-[40%] z-30 group flex flex-col items-center gap-4 bg-zinc-955/90 border-2 border-zinc-800 p-5 rounded-none shadow-[0_15px_45px_rgba(0,0,0,0.85)] select-none w-48 pointer-events-auto backdrop-blur-md cursor-grab active:cursor-grabbing hover:shadow-[0_0_35px_rgba(0,240,255,0.25)] transition-all duration-300"
     >
       {/* Analog clock dial face - "Simply Empty" (No dots or markers) */}
       <div className="relative w-28 h-28 rounded-full border-[4px] border-zinc-900 flex items-center justify-center bg-[#09090b] shadow-[inset_0_0_18px_rgba(0,0,0,0.95),_0_0_12px_rgba(0,0,0,0.5)]">

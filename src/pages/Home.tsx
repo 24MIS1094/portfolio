@@ -402,12 +402,11 @@ const HUDClock = ({ constraintsRef }: HUDClockProps) => {
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{
         scale: 1.22, // Enhanced micro-interactive hover zoom!
-        borderColor: "rgba(0, 240, 255, 0.85)"
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.75, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="absolute left-[calc(100%-15rem)] md:left-[calc(100%-16.5rem)] top-[30%] md:top-[40%] z-30 group flex flex-col items-center gap-4 bg-zinc-950/95 border-2 border-zinc-700 p-5 rounded-none shadow-[0_15px_45px_rgba(0,0,0,0.85)] select-none w-56 pointer-events-auto backdrop-blur-md cursor-grab active:cursor-grabbing hover:shadow-[0_0_35px_rgba(0,240,255,0.25)] transition-all duration-300"
+      className="absolute left-[calc(100%-15rem)] md:left-[calc(100%-16.5rem)] top-[30%] md:top-[40%] z-30 group flex flex-col items-center gap-4 bg-zinc-950/95 p-5 rounded-none shadow-[0_15px_45px_rgba(0,0,0,0.85)] select-none w-56 pointer-events-auto backdrop-blur-md cursor-grab active:cursor-grabbing hover:shadow-[0_0_35px_rgba(0,240,255,0.25)] transition-all duration-300"
     >
       {/* Analog clock dial face - "Simply Empty" (No dots or markers) */}
       <div className="relative w-28 h-28 rounded-full border-[4px] border-zinc-900 flex items-center justify-center bg-[#09090b] shadow-[inset_0_0_18px_rgba(0,0,0,0.95),_0_0_12px_rgba(0,0,0,0.5)]">

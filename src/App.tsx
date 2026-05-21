@@ -12,8 +12,6 @@ import VideoPlayer from './components/VideoPlayer';
 
 // Custom high-contrast water flow loop video played in the main application shell after transition
 const GLOBAL_VIDEO = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260217_030345_246c0224-10a4-422c-b324-070b7c0eceda.mp4';
-const CINEMA_BASE_WIDTH = 1600;
-const CINEMA_BASE_HEIGHT = 900;
 
 // --- STAR STRUCTURE FOR 3D ENGINE ---
 interface Star {
@@ -280,31 +278,9 @@ const App = () => {
   const [showShutter, setShowShutter] = useState(false);
   const [isWarping, setIsWarping] = useState(false);
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
-  const [isPortraitLocked, setIsPortraitLocked] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    const root = document.documentElement;
-
-    const updateCinemaFrame = () => {
-      const portrait = window.innerHeight > window.innerWidth;
-      const scale = Math.min(window.innerWidth / CINEMA_BASE_WIDTH, window.innerHeight / CINEMA_BASE_HEIGHT);
-
-      root.style.setProperty('--cinema-scale', String(Math.min(Math.max(scale, 0.4), 1)));
-      root.dataset.cinema = 'enabled';
-      root.dataset.orientation = portrait ? 'portrait' : 'landscape';
-      setIsPortraitLocked(portrait);
-    };
-
-    updateCinemaFrame();
-    window.addEventListener('resize', updateCinemaFrame);
-    window.addEventListener('orientationchange', updateCinemaFrame);
-
-    return () => {
-      window.removeEventListener('resize', updateCinemaFrame);
-      window.removeEventListener('orientationchange', updateCinemaFrame);
-    };
-  }, []);
+  // Cinema framing and forced-portrait lock removed to restore normal responsive mobile behavior
 
   // Track cursor position dynamically for custom targeting cursor reticle
   useEffect(() => {
@@ -484,23 +460,6 @@ const App = () => {
 
   return (
     <div className="relative min-h-screen bg-[#020108] text-white overflow-hidden font-sans app-shell">
-      <div className="cinema-frame">
-
-      {isPortraitLocked && (
-        <div className="fixed inset-0 z-[1200] flex items-center justify-center bg-black/95 backdrop-blur-xl px-6 text-center portrait-lock-overlay">
-          <div className="max-w-md rounded-3xl border border-cyan-400/20 bg-white/[0.03] p-6 shadow-[0_0_60px_rgba(0,240,255,0.15)]">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-400/10 text-3xl text-cyan-300">
-              ↺
-            </div>
-            <h2 className="text-2xl font-black uppercase tracking-[0.3em] text-white">Rotate to Landscape</h2>
-            <p className="mt-4 text-sm leading-7 text-white/70">
-              This portfolio is designed for a full-screen 16:9 cinematic view on phones and tablets.
-              Turn your device sideways to continue.
-            </p>
-          </div>
-        </div>
-      )}
-      
       {/* 1. GLOBAL BACKGROUND VIDEO STREAM - ONLY RENDERED ONCE ENTERED (Zero visual leak during preloader!) */}
       {hasEntered && (
         <div className="fixed inset-0 z-0 pointer-events-none">
@@ -768,7 +727,6 @@ const App = () => {
           </div>
         </div>
       )}
-    </div>
     </div>
   );
 };

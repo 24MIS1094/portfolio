@@ -287,21 +287,13 @@ const App = () => {
     const root = document.documentElement;
 
     const updateCinemaFrame = () => {
-      const isTouchLike = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024;
       const portrait = window.innerHeight > window.innerWidth;
+      const scale = Math.min(window.innerWidth / CINEMA_BASE_WIDTH, window.innerHeight / CINEMA_BASE_HEIGHT);
 
-      if (isTouchLike) {
-        const scale = Math.min(window.innerWidth / CINEMA_BASE_WIDTH, window.innerHeight / CINEMA_BASE_HEIGHT);
-        root.style.setProperty('--cinema-scale', String(Math.max(scale, 0.4)));
-        root.dataset.cinema = 'enabled';
-        root.dataset.orientation = portrait ? 'portrait' : 'landscape';
-        setIsPortraitLocked(portrait);
-      } else {
-        root.style.setProperty('--cinema-scale', '1');
-        root.dataset.cinema = 'disabled';
-        root.dataset.orientation = 'landscape';
-        setIsPortraitLocked(false);
-      }
+      root.style.setProperty('--cinema-scale', String(Math.min(Math.max(scale, 0.4), 1)));
+      root.dataset.cinema = 'enabled';
+      root.dataset.orientation = portrait ? 'portrait' : 'landscape';
+      setIsPortraitLocked(portrait);
     };
 
     updateCinemaFrame();

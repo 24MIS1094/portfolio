@@ -20,4 +20,12 @@ Follow these steps to enable automatic deploys from GitHub Actions to Vercel.
 - The workflow uses `npm run build` and deploys the `dist` folder. Ensure your build outputs to `dist` (Vite default is `dist`).
 - If you prefer Vercel-integrated deployments, you can also connect the GitHub repo in the Vercel dashboard and skip the workflow.
 
+4. Required GitHub Actions secrets
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+If you want me to finish the workflow-based deploy setup, send the Vercel token securely and I can help you populate the secrets in GitHub. Without the token, I can only document the steps, not create the secrets for you.
+
 If you want, I can also detect and open the specific GitHub Actions run page or create a README section linking to this file.

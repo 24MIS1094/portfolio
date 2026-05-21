@@ -1,0 +1,19 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="72" y1="68" x2="440" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00F0FF"/>
+      <stop offset="0.5" stop-color="#FF007F"/>
+      <stop offset="1" stop-color="#AB00FF"/>
+    </linearGradient>
+    <radialGradient id="r" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 224) rotate(90) scale(220)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#020108"/>
+  <circle cx="256" cy="256" r="194" fill="url(#r)"/>
+  <circle cx="256" cy="256" r="176" stroke="url(#g)" stroke-width="18" opacity="0.9"/>
+  <circle cx="256" cy="256" r="120" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2" stroke-dasharray="10 14"/>
+  <path d="M164 350L208 162H250L295 289L341 162H384L290 350H247L203 226L157 350H164Z" fill="url(#g)"/>
+  <path d="M342 176L383 176L270 351L229 351L342 176Z" fill="#FFFFFF" fill-opacity="0.12"/>
+</svg>

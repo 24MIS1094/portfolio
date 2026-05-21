@@ -12,6 +12,8 @@ import VideoPlayer from './components/VideoPlayer';
 
 // Custom high-contrast water flow loop video played in the main application shell after transition
 const GLOBAL_VIDEO = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260217_030345_246c0224-10a4-422c-b324-070b7c0eceda.mp4';
+const CINEMA_BASE_WIDTH = 1600;
+const CINEMA_BASE_HEIGHT = 900;
 
 // --- STAR STRUCTURE FOR 3D ENGINE ---
 interface Star {
@@ -280,6 +282,32 @@ const App = () => {
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
   const location = useLocation();
 
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const updateCinemaFrame = () => {
+      const isTouchLike = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024;
+
+      if (isTouchLike) {
+        const scale = Math.min(window.innerWidth / CINEMA_BASE_WIDTH, window.innerHeight / CINEMA_BASE_HEIGHT);
+        root.style.setProperty('--cinema-scale', String(Math.max(scale, 0.4)));
+        root.dataset.cinema = 'enabled';
+      } else {
+        root.style.setProperty('--cinema-scale', '1');
+        root.dataset.cinema = 'disabled';
+      }
+    };
+
+    updateCinemaFrame();
+    window.addEventListener('resize', updateCinemaFrame);
+    window.addEventListener('orientationchange', updateCinemaFrame);
+
+    return () => {
+      window.removeEventListener('resize', updateCinemaFrame);
+      window.removeEventListener('orientationchange', updateCinemaFrame);
+    };
+  }, []);
+
   // Track cursor position dynamically for custom targeting cursor reticle
   useEffect(() => {
     const handleGlobalMouseMove = (e: MouseEvent) => {
@@ -457,7 +485,8 @@ const App = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#020108] text-white overflow-x-hidden font-sans">
+    <div className="relative min-h-screen bg-[#020108] text-white overflow-hidden font-sans app-shell">
+      <div className="cinema-frame">
       
       {/* 1. GLOBAL BACKGROUND VIDEO STREAM - ONLY RENDERED ONCE ENTERED (Zero visual leak during preloader!) */}
       {hasEntered && (
@@ -726,6 +755,7 @@ const App = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

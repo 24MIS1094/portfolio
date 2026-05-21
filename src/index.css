@@ -22,6 +22,7 @@
 .arjun-title-glow {
   font-family: 'Oxanium', 'Syne', 'Orbitron', sans-serif;
   background: linear-gradient(135deg, #8a9597 0%, #cbd5e1 33%, #ff5f1f 66%, #00f0ff 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 200%;
@@ -36,6 +37,12 @@ body,
   min-height: 100%;
   background-color: #020202;
   overflow-x: hidden;
+}
+
+html[data-cinema='enabled'],
+body[data-cinema='enabled'],
+#root[data-cinema='enabled'] {
+  overflow: hidden;
 }
 
 body {
@@ -307,4 +314,56 @@ body {
 }
 .liquid-fluid-aura {
   animation: liquidWave 8s ease-in-out infinite;
+}
+
+/* Touch / tablet 16:9 cinema mode */
+.app-shell {
+  isolation: isolate;
+}
+
+.cinema-frame {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  transform: none;
+  transform-origin: center center;
+}
+
+html[data-cinema='enabled'] .app-shell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+html[data-cinema='enabled'] .cinema-frame {
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  aspect-ratio: 16 / 9;
+  transform: scale(var(--cinema-scale, 1));
+  transform-origin: center center;
+  border-radius: 0;
+  box-shadow: 0 0 0 9999px #020202;
+  overflow: hidden;
+}
+
+@media (pointer: coarse), (max-width: 1024px) {
+  html, body, #root {
+    overflow: hidden;
+  }
+
+  .app-shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .cinema-frame {
+    width: min(100vw, calc(100vh * 16 / 9));
+    height: min(100vh, calc(100vw * 9 / 16));
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
 }

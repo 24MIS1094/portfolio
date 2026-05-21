@@ -29,3 +29,9 @@ Follow these steps to enable automatic deploys from GitHub Actions to Vercel.
 If you want me to finish the workflow-based deploy setup, send the Vercel token securely and I can help you populate the secrets in GitHub. Without the token, I can only document the steps, not create the secrets for you.
 
 If you want, I can also detect and open the specific GitHub Actions run page or create a README section linking to this file.
+
+## Live Site
+
+The production site is live at: https://arjun-yn.vercel.app/
+
+If you'd like, I can add this URL to other docs or the project README.

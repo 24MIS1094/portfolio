@@ -615,9 +615,6 @@ const HUDClock = ({ constraintsRef }: HUDClockProps) => {
         </div>
 
         <div className="h-px w-full bg-white/10 mt-1.5" />
-        <div className="text-[6px] text-white/25 uppercase tracking-widest mt-0.5 group-hover:text-white/60 transition-colors">
-          [DRAG TO MOVE]
-        </div>
       </div>
     </motion.div>
   );
@@ -729,7 +726,7 @@ const Home = () => {
 
         {/* Bottom telemetry line */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-white/20 flex items-center justify-between text-[7px] font-mono font-bold tracking-[0.2em] text-white/50 uppercase">
-          <div>[HOVER INITIAL NODES FOR FULL REVEAL]</div>
+          <div>INITIAL NODES</div>
           <div>ESTABLISHED SECURE SECTOR NODE PORTAL</div>
         </div>
       </div>
@@ -868,7 +865,7 @@ const Home = () => {
               </div>
             </motion.div>
             <span className="text-[7.5px] font-mono tracking-widest text-white/30 uppercase">
-              [TAP CONTROLLER TO SWITCH SYSTEM GRAVITY]
+              SYSTEM GRAVITY SWITCH
             </span>
           </motion.div>
 

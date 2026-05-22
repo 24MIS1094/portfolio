@@ -195,9 +195,6 @@ const Certificates = () => {
           <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-white mb-3">
             Certificates <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">Vault</span>
           </h1>
-          <p className="text-[11px] font-mono text-white/40 tracking-wider uppercase">
-            [Hover cards to activate sheen reflection & spatial audio chords]
-          </p>
         </div>
 
         {/* Certificates cards matrix grid */}
@@ -268,7 +265,7 @@ const Certificates = () => {
                 </h3>
 
                 <div className="flex items-center gap-1.5 text-[8.5px] font-mono text-white/40 group-hover:text-cyan-300 transition-colors uppercase">
-                  <span>[CLICK TO VERIFY CREDENTIAL]</span>
+                  <span>VERIFY CREDENTIAL</span>
                   <svg className="h-3 w-3 translate-y-[0.5px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>

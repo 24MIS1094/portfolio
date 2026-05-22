@@ -187,9 +187,6 @@ const Skills = () => {
           <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-white mb-3">
             Skills <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">Dashboard</span>
           </h1>
-          <p className="text-[11px] font-mono text-white/40 tracking-wider uppercase">
-            [Move cursor over categories to activate dynamic 3D sound waves]
-          </p>
         </div>
 
         {/* 3x2 / 2-column customizable Grid Layout */}

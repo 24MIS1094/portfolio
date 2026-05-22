@@ -534,7 +534,6 @@ const App = () => {
               <span>GRID SYSTEM LOCK: ACTIVE</span>
             </div>
             <div className="absolute bottom-8 right-24 hidden md:flex flex-col text-[8px] font-bold tracking-[0.2em] text-white/30 text-right uppercase pointer-events-none gap-0.5">
-              <span>CLICK CORE TO COMMENCE WARP TRANSITION</span>
               <span>ESTABLISHED SECURE NEON GATEWAY</span>
             </div>
 

@@ -1,73 +1,282 @@
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 import forageCyberPdf from '../../certificates/forage-cyber.pdf';
 import deloitteCyberPdf from '../../certificates/deloitte-cyber.pdf';
 import deloitteTechPdf from '../../certificates/deloitte-tech.pdf';
 
+// --- INDIAN CLASSICAL SWARAS FREQUENCIES ---
+const SWARAS = {
+  sa: 261.63,   // Shadj (C4)
+  ri: 293.66,   // Rishabh (D4)
+  ga: 329.63,   // Gandhar (E4)
+  ma: 349.23,   // Madhyam (F4)
+  pa: 392.00,   // Pancham (G4)
+  dha: 440.00,  // Dhaivat (A4)
+  ni: 493.88,   // Nishad (B4)
+  sa2: 523.25   // High Shadj (C5)
+};
+
+// --- INDIAN CLASSICAL SWARA SOUND EFFECTS SYNTHESIS ENGINE ---
+const playSwaraTone = (freq: number, type: OscillatorType = 'sine', duration: number = 0.35, delay: number = 0, volume: number = 0.08) => {
+  try {
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    const now = ctx.currentTime + delay;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now);
+    
+    // Smooth chime envelope structure
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(volume, now + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.start(now);
+    osc.stop(now + duration + 0.05);
+  } catch (e) {
+    console.warn("Audio Context error:", e);
+  }
+};
+
+const playCertChime = (index: number) => {
+  // Beautiful rising Swara chords on card hover
+  if (index === 0) {
+    playSwaraTone(SWARAS.sa, 'sine', 0.42, 0.00, 0.06);
+    playSwaraTone(SWARAS.ga, 'sine', 0.48, 0.07, 0.06);
+  } else if (index === 1) {
+    playSwaraTone(SWARAS.ri, 'sine', 0.42, 0.00, 0.06);
+    playSwaraTone(SWARAS.ma, 'sine', 0.48, 0.07, 0.06);
+  } else if (index === 2) {
+    playSwaraTone(SWARAS.ga, 'sine', 0.42, 0.00, 0.06);
+    playSwaraTone(SWARAS.pa, 'sine', 0.48, 0.07, 0.06);
+  } else if (index === 3) {
+    playSwaraTone(SWARAS.ma, 'sine', 0.42, 0.00, 0.06);
+    playSwaraTone(SWARAS.dha, 'sine', 0.48, 0.07, 0.06);
+  } else {
+    playSwaraTone(SWARAS.pa, 'sine', 0.42, 0.00, 0.06);
+    playSwaraTone(SWARAS.ni, 'sine', 0.48, 0.07, 0.06);
+  }
+};
+
+const certificatesData = [
+  {
+    title: "Develop Serverless Applications on Cloud Run",
+    issuer: "Google Cloud",
+    type: "BADGE",
+    url: "https://www.skills.google/public_profiles/390b49e5-1357-4a2e-a6b0-a95fdd9c6e07/badges/21035098",
+    color: "rgba(6, 182, 212, 0.4)", // Cyan
+    glow: "rgba(6, 182, 212, 0.15)",
+    sheen: "rgba(6, 182, 212, 0.12)",
+    icon: (
+      <svg className="h-7 w-7 text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z" />
+      </svg>
+    )
+  },
+  {
+    title: "Cloud Functions: 3 Ways",
+    issuer: "Google Cloud",
+    type: "BADGE",
+    url: "https://www.skills.google/public_profiles/390b49e5-1357-4a2e-a6b0-a95fdd9c6e07/badges/21082632",
+    color: "rgba(6, 182, 212, 0.4)", // Cyan
+    glow: "rgba(6, 182, 212, 0.15)",
+    sheen: "rgba(6, 182, 212, 0.12)",
+    icon: (
+      <svg className="h-7 w-7 text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+      </svg>
+    )
+  },
+  {
+    title: "Cybersecurity Analyst Job Simulation",
+    issuer: "Forage",
+    type: "SIMULATION / PDF",
+    url: forageCyberPdf,
+    color: "rgba(239, 68, 68, 0.4)", // Red
+    glow: "rgba(239, 68, 68, 0.15)",
+    sheen: "rgba(239, 68, 68, 0.12)",
+    icon: (
+      <svg className="h-7 w-7 text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    )
+  },
+  {
+    title: "Cyber & Data Analytics Job Simulation",
+    issuer: "Deloitte / Forage",
+    type: "SIMULATION / PDF",
+    url: deloitteCyberPdf,
+    color: "rgba(168, 85, 247, 0.4)", // Purple
+    glow: "rgba(168, 85, 247, 0.15)",
+    sheen: "rgba(168, 85, 247, 0.12)",
+    icon: (
+      <svg className="h-7 w-7 text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    )
+  },
+  {
+    title: "Technology Job Simulation",
+    issuer: "Deloitte / Forage",
+    type: "SIMULATION / PDF",
+    url: deloitteTechPdf,
+    color: "rgba(236, 72, 153, 0.4)", // Pink
+    glow: "rgba(236, 72, 153, 0.15)",
+    sheen: "rgba(236, 72, 153, 0.12)",
+    icon: (
+      <svg className="h-7 w-7 text-pink-500 drop-shadow-[0_0_10px_rgba(236,72,153,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+      </svg>
+    )
+  }
+];
+
 const Certificates = () => {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Smooth 3D tilt coordinates mapping
+    const rx = (x - rect.width / 2) / (rect.width / 2);
+    const ry = (y - rect.height / 2) / (rect.height / 2);
+    const rotateY = rx * 7;
+    const rotateX = -ry * 7;
+    
+    card.style.setProperty('--x', `${x}px`);
+    card.style.setProperty('--y', `${y}px`);
+    card.style.setProperty('--rx', `${rotateX}deg`);
+    card.style.setProperty('--ry', `${rotateY}deg`);
+  };
+
+  const handleCardMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    card.style.setProperty('--rx', '0deg');
+    card.style.setProperty('--ry', '0deg');
+  };
+
   return (
     <motion.main
-      className="min-h-[calc(100vh-5rem)] bg-[#010101] px-6 py-16 text-white"
-      initial={{ opacity: 0, y: 18 }}
+      className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-[#020205] px-6 py-20 text-white"
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.28, ease: 'easeOut' }}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="mx-auto w-full max-w-4xl rounded-2xl border border-white/20 bg-black/30 p-6">
-        <h1 className="text-3xl font-semibold">Certificates</h1>
+      {/* Dynamic Visual Matrix Background */}
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-70">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.06),transparent_40%),linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[length:100%_100%,100%_30px,30px_100%]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,transparent_0%,transparent_38%,rgba(2,2,5,0.72)_78%,rgba(2,2,5,0.98)_100%)]" />
+      </div>
 
-        <ul className="mt-6 list-disc space-y-4 pl-5 text-white/85">
-          <li>
-            <a 
-              href="https://www.skills.google/public_profiles/390b49e5-1357-4a2e-a6b0-a95fdd9c6e07/badges/21035098" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-blue-400 hover:underline transition-colors block"
-            >
-              Google Cloud - Develop Serverless Applications on Cloud Run
-            </a>
-          </li>
-          <li>
-            <a 
-              href="https://www.skills.google/public_profiles/390b49e5-1357-4a2e-a6b0-a95fdd9c6e07/badges/21082632" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-blue-400 hover:underline transition-colors block"
-            >
-              Google Cloud - Cloud Functions: 3 Ways
-            </a>
-          </li>
-          <li>
-            <a 
-              href={forageCyberPdf} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-blue-400 hover:underline transition-colors block"
-            >
-              Cybersecurity Analyst Job Simulation - Forage
-            </a>
-          </li>
-          <li>
-            <a 
-              href={deloitteCyberPdf} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-blue-400 hover:underline transition-colors block"
-            >
-              Deloitte Cyber & Data Analytics Job Simulation - Forage
-            </a>
-          </li>
-          <li>
-            <a 
-              href={deloitteTechPdf} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-blue-400 hover:underline transition-colors block"
-            >
-              Deloitte Technology Job Simulation - Forage
-            </a>
-          </li>
-        </ul>
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
+        {/* Page telemetry markers */}
+        <div className="mb-14 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="inline-flex items-center gap-2 rounded-full border border-cyan-500/35 bg-cyan-500/10 px-4 py-1.5 font-mono text-[9px] font-bold tracking-[0.2em] text-cyan-300 uppercase mb-4"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            <span>CREDENTIAL_VAULT // VERIFIED</span>
+          </motion.div>
+          
+          <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-white mb-3">
+            Certificates <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">Vault</span>
+          </h1>
+          <p className="text-[11px] font-mono text-white/40 tracking-wider uppercase">
+            [Hover cards to activate sheen reflection & spatial audio chords]
+          </p>
+        </div>
 
+        {/* Certificates cards matrix grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+          {certificatesData.map((cert, i) => (
+            <motion.a
+              href={cert.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={i}
+              onMouseEnter={() => {
+                setHoveredCard(i);
+                playCertChime(i);
+              }}
+              onMouseMove={handleCardMouseMove}
+              onMouseLeave={(e) => {
+                handleCardMouseLeave(e);
+                setHoveredCard(null);
+              }}
+              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-950/30 backdrop-blur-[20px] p-6 cursor-pointer transition-all duration-300 flex flex-col justify-between h-[250px]"
+              style={{
+                transform: hoveredCard === i ? 'perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))' : 'perspective(1000px) rotateX(0deg) rotateY(0deg)',
+                borderColor: hoveredCard === i ? cert.color : undefined,
+                boxShadow: hoveredCard === i 
+                  ? `inset 0 1px 2px rgba(255,255,255,0.15), 0 0 45px ${cert.glow}, 0 20px 45px rgba(0,0,0,0.6)` 
+                  : 'inset 0 1px 1px rgba(255,255,255,0.05), 0 12px 24px rgba(0,0,0,0.4)',
+                transition: 'transform 0.05s ease-out, border-color 0.4s ease, box-shadow 0.4s ease'
+              }}
+            >
+              {/* Specular cursor-following glare */}
+              {hoveredCard === i && (
+                <div 
+                  className="absolute inset-0 pointer-events-none opacity-100 z-0"
+                  style={{
+                    background: `radial-gradient(130px circle at var(--x, 50%) var(--y, 50%), ${cert.sheen}, transparent 85%), radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 75%)`
+                  }}
+                />
+              )}
+
+              {/* Luxury colored ambient dropshadow glow */}
+              <div 
+                className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none"
+                style={{
+                  background: `radial-gradient(220px circle at 50% 50%, ${cert.glow}, transparent 80%)`
+                }}
+              />
+
+              {/* Shutter glare sweeps */}
+              <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-[150%] skew-x-[-30deg] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[150%]" />
+
+              <div className="relative z-10 flex items-start justify-between w-full">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[7.5px] font-mono font-bold tracking-widest text-white/30 uppercase">{cert.issuer}</span>
+                  <div className="text-[8px] font-mono font-extrabold text-cyan-400 bg-cyan-400/10 px-2 py-0.5 border border-cyan-400/20 uppercase tracking-widest rounded mt-1.5 w-fit">
+                    {cert.type}
+                  </div>
+                </div>
+
+                {/* Certification Icon */}
+                <div className="shrink-0 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-all duration-500 group-hover:scale-110 group-hover:bg-white/10 group-hover:border-white/20">
+                  {cert.icon}
+                </div>
+              </div>
+
+              <div className="relative z-10 mt-6 w-full flex flex-col gap-4">
+                <h3 className="text-lg font-black uppercase text-white/90 leading-snug tracking-wide group-hover:text-white transition-colors">
+                  {cert.title}
+                </h3>
+
+                <div className="flex items-center gap-1.5 text-[8.5px] font-mono text-white/40 group-hover:text-cyan-300 transition-colors uppercase">
+                  <span>[CLICK TO VERIFY CREDENTIAL]</span>
+                  <svg className="h-3 w-3 translate-y-[0.5px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </div>
       </div>
     </motion.main>
   );

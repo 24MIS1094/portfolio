@@ -53,6 +53,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Hide default browser cursor globally on desktop viewports to enable custom cyber cursor reticle */
+@media (min-width: 1024px) {
+  body, html, a, button, input, select, textarea, .cursor-pointer, .hover-float-github, .hover-ring-phone, .hover-bounce-whatsapp {
+    cursor: none !important;
+  }
+}
+
 /* --- EXCELLENCE CSS: Advanced Neon Text & Border Glows --- */
 .neon-text-cyan {
   color: #ffffff;
@@ -319,4 +326,156 @@ body {
 /* Removed cinematic 16:9 forced framing for mobile/tablet to restore responsive behavior */
 .app-shell {
   isolation: isolate;
+}
+
+/* --- CYBERNETIC SOCIAL ICON ANIMATIONS --- */
+
+@keyframes phoneVibrate {
+  0%, 100% { transform: rotate(0) scale(1); }
+  15%, 45%, 75% { transform: rotate(-10deg) scale(1.1); }
+  30%, 60%, 90% { transform: rotate(10deg) scale(1.1); }
+}
+.hover-ring-phone:hover {
+  animation: phoneVibrate 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Staggered concentric acoustic soundwave pulses for Call */
+@keyframes wavePulse {
+  0% { transform: scale(0.85); opacity: 0.2; }
+  50% { transform: scale(1.05); opacity: 0.95; }
+  100% { transform: scale(0.85); opacity: 0.2; }
+}
+.wave-pulse-1 { animation: wavePulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+.wave-pulse-2 { animation: wavePulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1) 0.5s; }
+.wave-pulse-3 { animation: wavePulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1) 1s; }
+
+@keyframes callRadarPulse {
+  0% { transform: scale(0.65); opacity: 0.9; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+.radar-pulse-effect {
+  position: absolute;
+  inset: -15px;
+  border: 1px solid rgba(255, 95, 31, 0.45);
+  border-radius: 9999px;
+  pointer-events: none;
+  animation: callRadarPulse 1.8s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+@keyframes waBounce {
+  0%, 100% { transform: scale(1) translateY(0); }
+  35% { transform: scale(1.18) translateY(-10px) rotate(-3deg); }
+  55% { transform: scale(0.92) translateY(2px) rotate(3deg); }
+  75% { transform: scale(1.03) translateY(-2px); }
+}
+.hover-bounce-whatsapp:hover {
+  animation: waBounce 0.75s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* GitHub Idle Float with HUD concentric ring rotation */
+@keyframes gitBranchFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+.hover-float-github {
+  animation: gitBranchFloat 3s ease-in-out infinite;
+}
+.hover-float-github:hover {
+  animation-play-state: paused;
+  transform: scale(1.15) rotate(-5deg);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Double-concentric HUD rings for GitHub */
+@keyframes spinCW {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes spinCCW {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+.animate-spin-cw {
+  transform-origin: center;
+  animation: spinCW 12s linear infinite;
+}
+.animate-spin-ccw {
+  transform-origin: center;
+  animation: spinCCW 16s linear infinite;
+}
+
+/* LinkedIn rising chimes and circuit trace paths */
+@keyframes lkBarRise {
+  0% { transform: scaleY(0.15); opacity: 0.4; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+.bar-asc-1 { 
+  transform-origin: bottom; 
+  animation: lkBarRise 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+}
+.bar-asc-2 { 
+  transform-origin: bottom; 
+  animation: lkBarRise 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+}
+.bar-asc-3 { 
+  transform-origin: bottom; 
+  animation: lkBarRise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+}
+
+@keyframes circuitPulse {
+  0% { stroke-dashoffset: 120; opacity: 0.25; }
+  50% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: -120; opacity: 0.25; }
+}
+.circuit-path {
+  stroke-dasharray: 60;
+  animation: circuitPulse 4s infinite linear;
+}
+
+/* Instagram camera lens aperture rotation and rainbow border */
+@keyframes apertureSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.12); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.animate-aperture {
+  transform-origin: center;
+  animation: apertureSpin 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes instaBorderShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.insta-rainbow-sweep {
+  background: linear-gradient(45deg, #feda75, #d62976, #962fbf, #4f5bd5, #feda75);
+  background-size: 300% 300%;
+  animation: instaBorderShift 4s ease infinite;
+}
+
+.perspective-glow-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+}
+
+.shimmer-shining-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-shining-sweep::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: rotate(25deg);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.shimmer-shining-sweep:hover::after {
+  transform: translate(400%, -20%) rotate(25deg);
 }

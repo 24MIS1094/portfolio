@@ -1,6 +1,82 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue } from 'framer-motion';
 
+// --- INDIAN CLASSICAL SWARAS FREQUENCIES ---
+const SWARAS = {
+  sa: 261.63,   // Shadj (C4)
+  ri: 293.66,   // Rishabh (D4)
+  ga: 329.63,   // Gandhar (E4)
+  ma: 349.23,   // Madhyam (F4)
+  pa: 392.00,   // Pancham (G4)
+  dha: 440.00,  // Dhaivat (A4)
+  ni: 493.88,   // Nishad (B4)
+  sa2: 523.25   // High Shadj (C5)
+};
+
+// --- INDIAN CLASSICAL SWARA SOUND EFFECTS SYNTHESIS ENGINE ---
+const playSwaraTone = (freq: number, type: OscillatorType = 'sine', duration: number = 0.35, delay: number = 0, volume: number = 0.08) => {
+  try {
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    const now = ctx.currentTime + delay;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now);
+    
+    // Smooth flute envelope structure
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(volume, now + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.start(now);
+    osc.stop(now + duration + 0.05);
+  } catch (e) {
+    console.warn("Audio Context error:", e);
+  }
+};
+
+const playHomeSound = (type: 'sa' | 'ri' | 'ga' | 'ma' | 'pa' | 'chord' | 'scale') => {
+  switch (type) {
+    case 'sa':
+      playSwaraTone(SWARAS.sa, 'sine', 0.45);
+      break;
+    case 'ri':
+      playSwaraTone(SWARAS.ri, 'sine', 0.45);
+      break;
+    case 'ga':
+      playSwaraTone(SWARAS.ga, 'sine', 0.45);
+      break;
+    case 'ma':
+      playSwaraTone(SWARAS.ma, 'sine', 0.45);
+      break;
+    case 'pa':
+      playSwaraTone(SWARAS.pa, 'sine', 0.45);
+      break;
+    case 'chord':
+      playSwaraTone(SWARAS.sa, 'sine', 0.65, 0.00, 0.04);
+      playSwaraTone(SWARAS.ga, 'sine', 0.65, 0.08, 0.04);
+      playSwaraTone(SWARAS.pa, 'sine', 0.65, 0.16, 0.04);
+      break;
+    case 'scale':
+      playSwaraTone(SWARAS.sa, 'sine', 0.35, 0.00, 0.05);
+      playSwaraTone(SWARAS.ri, 'sine', 0.35, 0.07, 0.05);
+      playSwaraTone(SWARAS.ga, 'sine', 0.35, 0.14, 0.05);
+      playSwaraTone(SWARAS.ma, 'sine', 0.35, 0.21, 0.05);
+      playSwaraTone(SWARAS.pa, 'sine', 0.35, 0.28, 0.05);
+      playSwaraTone(SWARAS.dha, 'sine', 0.35, 0.35, 0.05);
+      playSwaraTone(SWARAS.ni, 'sine', 0.35, 0.42, 0.05);
+      playSwaraTone(SWARAS.sa2, 'sine', 0.50, 0.49, 0.06);
+      break;
+  }
+};
+
 // --- SYNTHESIZED SOUND EFFECTS ENGINE USING WEB AUDIO API ---
 const playClickSound = (type: 'hover' | 'click' | 'sync') => {
   try {
@@ -10,52 +86,58 @@ const playClickSound = (type: 'hover' | 'click' | 'sync') => {
     const now = ctx.currentTime;
 
     if (type === 'hover') {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(330, now);
-      osc.frequency.exponentialRampToValueAtTime(560, now + 0.1);
-      gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.015, now + 0.03);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.1);
+      playSwaraTone(SWARAS.sa, 'sine', 0.25);
     } else if (type === 'click') {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(440, now);
-      osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
-      gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.02, now + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.08);
+      playHomeSound('scale');
     } else if (type === 'sync') {
-      const osc1 = ctx.createOscillator();
-      const osc2 = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(150, now);
-      osc1.frequency.exponentialRampToValueAtTime(600, now + 0.4);
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(250, now);
-      osc2.frequency.exponentialRampToValueAtTime(900, now + 0.4);
-      gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.06, now + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-      osc1.connect(gain);
-      osc2.connect(gain);
-      gain.connect(ctx.destination);
-      osc1.start(now);
-      osc2.start(now);
-      osc1.stop(now + 0.4);
-      osc2.stop(now + 0.4);
+      playHomeSound('chord');
     }
+  } catch (e) {
+    console.warn("Audio Context deactivated.", e);
+  }
+};
+
+const playDotSound = (index: number, size: number) => {
+  try {
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    const now = ctx.currentTime;
+
+    const scale = [
+      110.00, 130.81, 146.83, 164.81, 196.00, // Octave 2
+      220.00, 261.63, 293.66, 329.63, 392.00, // Octave 3
+      440.00, 523.25, 587.33, 659.25, 783.99, // Octave 4
+      880.00, 1046.50, 1174.66, 1318.51, 1567.98, // Octave 5
+      1760.00, 2093.00 // Octave 6
+    ];
+
+    const baseIndex = Math.floor(size * 4) + (index % 6);
+    const noteIndex = Math.min(Math.max(baseIndex, 0), scale.length - 1);
+    const freq = scale[noteIndex];
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = size > 1.8 ? 'triangle' : 'sine';
+    osc.frequency.setValueAtTime(freq, now);
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.15, now + 0.15);
+
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(freq * 1.3, now);
+    filter.Q.setValueAtTime(4.0, now);
+
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(0.045, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.35);
   } catch (e) {
     console.warn("Audio Context deactivated.", e);
   }
@@ -137,14 +219,76 @@ const ParticleBackground = ({ gravityMode }: ParticleBackgroundProps) => {
       ) {
         return;
       }
+
+      const clickX = e.clientX;
+      const clickY = e.clientY;
+
+      // Add a visual ripple effect at click coordinates
       clickCirclesRef.current.push({
-        x: e.clientX,
-        y: e.clientY,
+        x: clickX,
+        y: clickY,
         radius: 0,
         maxRadius: 180,
         opacity: 0.8
       });
-      playClickSound('sync');
+
+      // Find particles within a click radius
+      const clickRadius = 75; // px
+      let clickedIndices: number[] = [];
+
+      for (let i = 0; i < particles.length; i++) {
+        const dx = particles[i].x - clickX;
+        const dy = particles[i].y - clickY;
+        const dist = Math.hypot(dx, dy);
+        if (dist < clickRadius) {
+          clickedIndices.push(i);
+        }
+      }
+
+      // If no particles are within the 75px radius, find the absolute nearest particle on the screen
+      if (clickedIndices.length === 0 && particles.length > 0) {
+        let minIndex = 0;
+        let minDist = Infinity;
+        for (let i = 0; i < particles.length; i++) {
+          const dx = particles[i].x - clickX;
+          const dy = particles[i].y - clickY;
+          const dist = Math.hypot(dx, dy);
+          if (dist < minDist) {
+            minDist = dist;
+            minIndex = i;
+          }
+        }
+        clickedIndices.push(minIndex);
+      }
+
+      // Play unique staggered sounds and warp their positions!
+      const maxSounds = 5;
+      const toWarp = clickedIndices.slice(0, maxSounds);
+
+      toWarp.forEach((idx, soundIndex) => {
+        const p = particles[idx];
+        
+        // Play the dot's unique sound with a staggered arpeggio delay (40ms steps)
+        setTimeout(() => {
+          playDotSound(idx, p.size);
+        }, soundIndex * 40);
+
+        // Warp the particle to a new random coordinate
+        const newAngle = Math.random() * Math.PI * 2;
+        const newDist = 50 + Math.random() * Math.min(width, height) * 0.45;
+        p.x = Math.random() * width;
+        p.y = Math.random() * height;
+        p.vx = (Math.random() - 0.5) * 1.2;
+        p.vy = (Math.random() - 0.5) * 1.2;
+        p.angle = newAngle;
+        p.distanceFromCenter = newDist;
+        p.baseX = width / 2 + Math.cos(newAngle) * newDist;
+        p.baseY = height / 2 + Math.sin(newAngle) * newDist;
+      });
+
+      if (clickedIndices.length === 0) {
+        playClickSound('sync');
+      }
     };
     window.addEventListener('click', handleCanvasClick);
 
@@ -276,7 +420,13 @@ interface NamePartProps {
 }
 
 const NamePart = ({ letter, active, onActivate, onDeactivate, hoverColor }: NamePartProps) => {
-  const triggerHover = () => playClickSound('hover');
+  const triggerHover = () => {
+    if (letter === 'Y') {
+      playSwaraTone(SWARAS.sa, 'sine', 0.5, 0, 0.08);
+    } else {
+      playSwaraTone(SWARAS.pa, 'sine', 0.5, 0, 0.08);
+    }
+  };
 
   return (
     <motion.div
@@ -478,7 +628,33 @@ const Home = () => {
   const [activeReveal, setActiveReveal] = useState<'yadavaram' | 'neraniki' | null>(null);
   const [gravityMode, setGravityMode] = useState<'FREE_FLOW' | 'SOLAR_ORBIT' | 'SPIRAL_GALAXY'>("FREE_FLOW");
   const [mounted, setMounted] = useState(false);
+  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
+  const [hoveredGravity, setHoveredGravity] = useState<boolean>(false);
   const mainRef = useRef<HTMLDivElement | null>(null);
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Gentle 3D tilt physics offsets
+    const rx = (x - rect.width / 2) / (rect.width / 2);
+    const ry = (y - rect.height / 2) / (rect.height / 2);
+    const rotateY = rx * 8;
+    const rotateX = -ry * 8;
+    
+    card.style.setProperty('--x', `${x}px`);
+    card.style.setProperty('--y', `${y}px`);
+    card.style.setProperty('--rx', `${rotateX}deg`);
+    card.style.setProperty('--ry', `${rotateY}deg`);
+  };
+
+  const handleCardMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    card.style.setProperty('--rx', '0deg');
+    card.style.setProperty('--ry', '0deg');
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -634,20 +810,46 @@ const Home = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.65 }}
             className="flex flex-col items-center gap-3 select-none z-20 cursor-pointer"
-            onClick={toggleGravity}
+            onClick={() => {
+              toggleGravity();
+              playHomeSound('scale');
+            }}
+            onMouseEnter={() => {
+              setHoveredGravity(true);
+              playHomeSound('chord');
+            }}
+            onMouseMove={handleCardMouseMove}
+            onMouseLeave={(e) => {
+              handleCardMouseLeave(e);
+              setHoveredGravity(false);
+            }}
           >
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              className="flex items-center gap-4 border border-white/30 bg-black/60 px-6 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.65)] hover:border-cyan-400/40 transition-colors"
+              className="flex items-center gap-4 border border-white/20 bg-black/60 px-6 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.65)] hover:border-cyan-400/40 rounded-2xl relative overflow-hidden transition-all duration-300"
+              style={{
+                transform: hoveredGravity ? 'perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))' : 'perspective(800px) rotateX(0deg) rotateY(0deg)',
+                transition: 'transform 0.05s ease-out, border-color 0.4s ease, box-shadow 0.4s ease',
+                borderColor: hoveredGravity ? 'rgba(0, 240, 255, 0.4)' : undefined,
+                boxShadow: hoveredGravity ? '0 0 30px rgba(0, 240, 255, 0.2), inset 0 1px 2px rgba(255,255,255,0.15)' : undefined
+              }}
             >
-              <div className="flex flex-col font-mono text-[9px] font-bold text-left tracking-widest gap-0.5">
+              {hoveredGravity && (
+                <div 
+                  className="absolute inset-0 pointer-events-none opacity-100 z-0"
+                  style={{
+                    background: 'radial-gradient(120px circle at var(--x, 50%) var(--y, 50%), rgba(0,240,255,0.12), transparent 80%)'
+                  }}
+                />
+              )}
+              <div className="flex flex-col font-mono text-[9px] font-bold text-left tracking-widest gap-0.5 relative z-10">
                 <span className="text-white/30 text-[7.5px]">GRAVITY_sync_ENGINE</span>
                 <span className="text-cyan-300">ACTIVE: {gravityMode}</span>
               </div>
-              <div className="h-6 w-[1.5px] bg-white/25" />
+              <div className="h-6 w-[1.5px] bg-white/25 relative z-10" />
               
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 relative z-10">
                 <div
                   className={`h-2 w-2 rounded-full ${
                     gravityMode === "FREE_FLOW" ? "bg-cyan-400 shadow-[0_0_8px_#00f0ff]" : "bg-white/20"
@@ -686,9 +888,48 @@ const Home = () => {
                     e.stopPropagation();
                     handleSkillCardClick(skill.query);
                   }}
-                  className="group relative rounded-none border border-white/20 bg-[#07070d]/65 p-4 flex flex-col justify-between h-[105px] cursor-pointer hover:border-cyan-400/40 hover:bg-black/90 shadow-[0_12px_24px_rgba(0,0,0,0.5)] transition-all duration-300 select-none"
+                  onMouseEnter={() => {
+                    setHoveredSkill(i);
+                    const swaras: ('sa'|'ri'|'ga'|'ma')[] = ['sa', 'ri', 'ga', 'ma'];
+                    playHomeSound(swaras[i]);
+                  }}
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={(e) => {
+                    handleCardMouseLeave(e);
+                    setHoveredSkill(null);
+                  }}
+                  className="group relative rounded-2xl border border-white/10 bg-[#07070d]/65 p-5 flex flex-col justify-between h-[115px] cursor-pointer hover:bg-black/90 shadow-[0_12px_24px_rgba(0,0,0,0.5)] transition-all duration-300 select-none overflow-hidden"
+                  style={{
+                    transform: hoveredSkill === i ? 'perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))' : 'perspective(800px) rotateX(0deg) rotateY(0deg)',
+                    transition: 'transform 0.05s ease-out, border-color 0.4s ease, box-shadow 0.4s ease',
+                    borderColor: hoveredSkill === i ? (
+                      i === 0 ? 'rgba(0, 240, 255, 0.4)' :
+                      i === 1 ? 'rgba(255, 0, 127, 0.4)' :
+                      i === 2 ? 'rgba(255, 95, 31, 0.4)' :
+                      'rgba(171, 0, 255, 0.4)'
+                    ) : undefined,
+                    boxShadow: hoveredSkill === i ? (
+                      i === 0 ? '0 0 30px rgba(0, 240, 255, 0.15), inset 0 1px 2px rgba(255,255,255,0.15)' :
+                      i === 1 ? '0 0 30px rgba(255, 0, 127, 0.15), inset 0 1px 2px rgba(255,255,255,0.15)' :
+                      i === 2 ? '0 0 30px rgba(255, 95, 31, 0.15), inset 0 1px 2px rgba(255,255,255,0.15)' :
+                      '0 0 30px rgba(171, 0, 255, 0.15), inset 0 1px 2px rgba(255,255,255,0.15)'
+                    ) : '0 12px 24px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05)'
+                  }}
                 >
-                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  {hoveredSkill === i && (
+                    <div 
+                      className="absolute inset-0 pointer-events-none opacity-100 z-0"
+                      style={{
+                        background: `radial-gradient(120px circle at var(--x, 50%) var(--y, 50%), ${
+                          i === 0 ? 'rgba(0,240,255,0.12)' :
+                          i === 1 ? 'rgba(255,0,127,0.12)' :
+                          i === 2 ? 'rgba(255,95,31,0.12)' :
+                          'rgba(171,0,255,0.12)'
+                        }, transparent 80%), radial-gradient(220px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 75%)`
+                      }}
+                    />
+                  )}
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                     <div
                       className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-300/40 to-transparent opacity-0 group-hover:opacity-100"
                       style={{
@@ -696,14 +937,14 @@ const Home = () => {
                       }}
                     />
                   </div>
-                  <div className="flex justify-between items-center text-[7px] font-mono font-bold tracking-wider text-white/25">
+                  <div className="flex justify-between items-center text-[7px] font-mono font-bold tracking-wider text-white/25 relative z-10">
                     <span>{skill.code}</span>
                     <span className="text-cyan-400/60 group-hover:text-cyan-400">[SEARCH_SYS]</span>
                   </div>
-                  <div className="text-sm font-bold tracking-wider uppercase text-white/80 group-hover:text-white transition-colors">
+                  <div className="text-sm font-bold tracking-wider uppercase text-white/80 group-hover:text-white transition-colors relative z-10">
                     {skill.name}
                   </div>
-                  <div className="mt-2.5 flex flex-col gap-1">
+                  <div className="mt-2.5 flex flex-col gap-1 relative z-10">
                     <div className="h-[3px] w-full bg-white/5 rounded-none overflow-hidden">
                       <motion.div
                         className="h-full bg-gradient-to-r from-cyan-400 to-pink-500"

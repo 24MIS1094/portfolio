@@ -9,6 +9,7 @@ import Certificates from './pages/Certificates';
 import Skills from './pages/Skills';
 import Contact from './pages/Contact';
 import VideoPlayer from './components/VideoPlayer';
+import CustomCursor from './components/CustomCursor';
 
 // Custom high-contrast water flow loop video played in the main application shell after transition
 const GLOBAL_VIDEO = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260217_030345_246c0224-10a4-422c-b324-070b7c0eceda.mp4';
@@ -277,19 +278,9 @@ const App = () => {
   const [hasEntered, setHasEntered] = useState(false);
   const [showShutter, setShowShutter] = useState(false);
   const [isWarping, setIsWarping] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
   const location = useLocation();
 
   // Cinema framing and forced-portrait lock removed to restore normal responsive mobile behavior
-
-  // Track cursor position dynamically for custom targeting cursor reticle
-  useEffect(() => {
-    const handleGlobalMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleGlobalMouseMove);
-    return () => window.removeEventListener('mousemove', handleGlobalMouseMove);
-  }, []);
 
   // Premium synthesized spatial/hyperspace-warp sound sweep via Web Audio API
   const playEpicSynth = () => {
@@ -460,6 +451,7 @@ const App = () => {
 
   return (
     <div className="relative min-h-screen bg-[#020108] text-white overflow-hidden font-sans app-shell">
+      <CustomCursor />
       {/* 1. GLOBAL BACKGROUND VIDEO STREAM - ONLY RENDERED ONCE ENTERED (Zero visual leak during preloader!) */}
       {hasEntered && (
         <div className="fixed inset-0 z-0 pointer-events-none">
@@ -649,28 +641,6 @@ const App = () => {
                 <span className="absolute inset-0 rounded-full border-2 border-cyan-400/20 group-hover:border-pink-500/40 animate-ping opacity-60"></span>
               </motion.div>
             </div>
-
-            {/* 3. DYNAMIC HOLOGRAPHIC TARGETING CURSOR (Only shown in preloader on desktop!) */}
-            {mousePos.x !== -1000 && (
-              <div 
-                className="hidden lg:block fixed pointer-events-none z-[1002] -translate-x-1/2 -translate-y-1/2 select-none"
-                style={{ left: mousePos.x, top: mousePos.y }}
-              >
-                {/* Spinning crosshair circle */}
-                <div className="w-9 h-9 border border-dashed border-cyan-400/60 rounded-full animate-spin" style={{ animationDuration: '6s' }} />
-                
-                {/* Horizontal targeting ticks */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-[1px] bg-cyan-400/30" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-12 w-[1px] bg-cyan-400/30" />
-                
-                {/* Vector coordinate readouts */}
-                <div className="absolute left-6 top-6 flex flex-col font-mono text-[7px] text-cyan-400 font-extrabold tracking-wider bg-black/75 px-1.5 py-0.5 rounded border border-cyan-400/20 shadow-md">
-                  <span>TARGET LOCK // ON</span>
-                  <span>X: {mousePos.x}</span>
-                  <span>Y: {mousePos.y}</span>
-                </div>
-              </div>
-            )}
 
           </motion.div>
         )}

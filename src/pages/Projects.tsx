@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SpiderWeb from '../components/SpiderWeb';
 
@@ -20,6 +21,66 @@ const itemVariants = {
 };
 
 const Projects = () => {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Gentle 3D tilt physics offsets
+    const rx = (x - rect.width / 2) / (rect.width / 2);
+    const ry = (y - rect.height / 2) / (rect.height / 2);
+    const rotateY = rx * 7;
+    const rotateX = -ry * 7;
+    
+    card.style.setProperty('--x', `${x}px`);
+    card.style.setProperty('--y', `${y}px`);
+    card.style.setProperty('--rx', `${rotateX}deg`);
+    card.style.setProperty('--ry', `${rotateY}deg`);
+  };
+
+  const handleCardMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    card.style.setProperty('--rx', '0deg');
+    card.style.setProperty('--ry', '0deg');
+  };
+
+  const playSwaraTone = (freq: number, duration: number = 0.5) => {
+    try {
+      const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContext) return;
+      const ctx = new AudioContext();
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(0.05, now + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + duration + 0.05);
+    } catch (e) {}
+  };
+
+  const playProjectChime = (index: number) => {
+    if (index === 0) {
+      // Gorgeous red chime (Sa-Ga progression)
+      playSwaraTone(261.63, 0.45); // Sa
+      setTimeout(() => playSwaraTone(329.63, 0.55), 70); // Ga
+    } else {
+      // Gorgeous cyan chime (Pa-Sa2 progression)
+      playSwaraTone(392.00, 0.45); // Pa
+      setTimeout(() => playSwaraTone(523.25, 0.55), 70); // Sa2
+    }
+  };
+
   return (
     <motion.main
       className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-[#050505] px-6 py-20 text-white"
@@ -126,8 +187,43 @@ const Projects = () => {
           {/* Project 1: Neon Red Theme (Job Portal) */}
           <motion.section 
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-[2.5rem] border border-red-500/10 bg-gradient-to-br from-red-900/[0.05] to-transparent p-8 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(255,0,60,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-red-500/30 hover:shadow-[inset_0_1px_1px_rgba(255,0,60,0.2),_0_0_80px_rgba(255,0,60,0.15)] cursor-default"
+            onMouseEnter={() => {
+              setHoveredCard(0);
+              playProjectChime(0);
+            }}
+            onMouseMove={handleCardMouseMove}
+            onMouseLeave={(e) => {
+              handleCardMouseLeave(e);
+              setHoveredCard(null);
+            }}
+            className="group relative overflow-hidden rounded-[2.5rem] border border-red-500/10 bg-zinc-950/40 backdrop-blur-[30px] p-8 md:p-10 cursor-default transition-all duration-300 perspective-glow-card"
+            style={{
+              borderColor: hoveredCard === 0 ? 'rgba(239, 68, 68, 0.3)' : undefined,
+              boxShadow: hoveredCard === 0 
+                ? 'inset 0 1px 2px rgba(255,255,255,0.15), 0 0 50px rgba(239, 68, 68, 0.15), 0 20px 45px rgba(0,0,0,0.6)' 
+                : 'inset 0 1px 1px rgba(255,255,255,0.05), 0 15px 30px rgba(0,0,0,0.4)',
+              transform: hoveredCard === 0 ? 'perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))' : 'perspective(1200px) rotateX(0deg) rotateY(0deg)',
+              transition: 'transform 0.05s ease-out, border-color 0.4s ease, box-shadow 0.4s ease'
+            }}
           >
+            {/* Dynamic Specular Gloss Sheen - follows cursor */}
+            {hoveredCard === 0 && (
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-100 transition-opacity duration-300 z-0"
+                style={{
+                  background: 'radial-gradient(180px circle at var(--x, 50%) var(--y, 50%), rgba(239,68,68,0.1), transparent 80%), radial-gradient(320px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 75%)'
+                }}
+              />
+            )}
+
+            {/* Luxury Colored Ambient Back-glow Mesh */}
+            <div 
+              className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none"
+              style={{
+                background: 'radial-gradient(250px circle at 50% 50%, rgba(239,68,68,0.06), transparent 80%), linear-gradient(135deg, rgba(239,68,68,0.02) 0%, transparent 100%)'
+              }}
+            />
+
             {/* Cinematic Shutter Sweep */}
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-red-500/[0.08] to-transparent -translate-x-[150%] skew-x-[-30deg] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[150%]"></div>
             
@@ -174,8 +270,43 @@ const Projects = () => {
           {/* Project 2: Neon Cyan Theme (Temple System) */}
           <motion.section 
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-[2.5rem] border border-cyan-500/10 bg-gradient-to-br from-cyan-900/[0.05] to-transparent p-8 backdrop-blur-[60px] shadow-[inset_0_1px_1px_rgba(0,229,255,0.1),_0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 hover:-translate-y-2 hover:border-cyan-500/30 hover:shadow-[inset_0_1px_1px_rgba(0,229,255,0.2),_0_0_80px_rgba(0,229,255,0.15)] cursor-default"
+            onMouseEnter={() => {
+              setHoveredCard(1);
+              playProjectChime(1);
+            }}
+            onMouseMove={handleCardMouseMove}
+            onMouseLeave={(e) => {
+              handleCardMouseLeave(e);
+              setHoveredCard(null);
+            }}
+            className="group relative overflow-hidden rounded-[2.5rem] border border-cyan-500/10 bg-zinc-950/40 backdrop-blur-[30px] p-8 md:p-10 cursor-default transition-all duration-300 perspective-glow-card"
+            style={{
+              borderColor: hoveredCard === 1 ? 'rgba(6, 182, 212, 0.3)' : undefined,
+              boxShadow: hoveredCard === 1 
+                ? 'inset 0 1px 2px rgba(255,255,255,0.15), 0 0 50px rgba(6, 182, 212, 0.15), 0 20px 45px rgba(0,0,0,0.6)' 
+                : 'inset 0 1px 1px rgba(255,255,255,0.05), 0 15px 30px rgba(0,0,0,0.4)',
+              transform: hoveredCard === 1 ? 'perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))' : 'perspective(1200px) rotateX(0deg) rotateY(0deg)',
+              transition: 'transform 0.05s ease-out, border-color 0.4s ease, box-shadow 0.4s ease'
+            }}
           >
+            {/* Dynamic Specular Gloss Sheen - follows cursor */}
+            {hoveredCard === 1 && (
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-100 transition-opacity duration-300 z-0"
+                style={{
+                  background: 'radial-gradient(180px circle at var(--x, 50%) var(--y, 50%), rgba(6,182,212,0.1), transparent 80%), radial-gradient(320px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 75%)'
+                }}
+              />
+            )}
+
+            {/* Luxury Colored Ambient Back-glow Mesh */}
+            <div 
+              className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none"
+              style={{
+                background: 'radial-gradient(250px circle at 50% 50%, rgba(6,182,212,0.06), transparent 80%), linear-gradient(135deg, rgba(6,182,212,0.02) 0%, transparent 100%)'
+              }}
+            />
+
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-cyan-500/[0.08] to-transparent -translate-x-[150%] skew-x-[-30deg] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[150%]"></div>
             
             <div className="relative z-10 flex flex-col items-start gap-10">

@@ -701,7 +701,7 @@ const Home = () => {
             <span>SYSTEM_NODE // RENDER_ACTIVE</span>
           </div>
           <div className="text-cyan-400">GRAVITY_SYNC: {gravityMode}</div>
-          <div id="hud-mouse-vector">VECTOR: [X_0 // Y_0]</div>
+          <div id="hud-mouse-vector">VECTOR: X_0 // Y_0</div>
         </div>
 
         {/* Left vertical border */}
@@ -720,7 +720,7 @@ const Home = () => {
 
         {/* Right vertical border */}
         <div className="absolute right-0 top-10 bottom-10 w-px bg-white/20 flex flex-col justify-between items-center py-6 text-white/35">
-          <span className="text-[6px] font-mono select-none">SCALE: [1.2]</span>
+          <span className="text-[6px] font-mono select-none">SCALE: 1.2</span>
           <span className="text-[6px] font-mono select-none">FPS: 60Hz</span>
         </div>
 
@@ -936,7 +936,7 @@ const Home = () => {
                   </div>
                   <div className="flex justify-between items-center text-[7px] font-mono font-bold tracking-wider text-white/25 relative z-10">
                     <span>{skill.code}</span>
-                    <span className="text-cyan-400/60 group-hover:text-cyan-400">[SEARCH_SYS]</span>
+                    <span className="text-cyan-400/60 group-hover:text-cyan-400">SEARCH SYS</span>
                   </div>
                   <div className="text-sm font-bold tracking-wider uppercase text-white/80 group-hover:text-white transition-colors relative z-10">
                     {skill.name}

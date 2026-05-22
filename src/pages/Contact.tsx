@@ -523,7 +523,7 @@ const Contact: React.FC = () => {
                 }}
                 className="absolute top-5 right-5 text-white/40 hover:text-red-400 font-mono text-[9px] uppercase tracking-widest bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 transition-all duration-300 z-10 rounded-full cursor-pointer"
               >
-                [ Close ]
+                Close
               </button>
 
               <div className="mb-8 select-none mt-4 text-left">

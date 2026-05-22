@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <!-- Progressive Web App / Fullscreen support -->
+    <!-- Progressive Web App support -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="/manifest.webmanifest">
@@ -25,29 +25,5 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Fullscreen helper: attempt fullscreen on first user gesture (best-effort) -->
-    <script>
-      (function () {
-        if (!('requestFullscreen' in document.documentElement)) return;
-        try {
-          // Only prompt once per device
-          if (localStorage.getItem('pwa_fullscreen_auto')) return;
-        } catch (e) {}
-
-        function enableFullscreenOnce() {
-          document.documentElement.requestFullscreen?.().catch(()=>{});
-          try { localStorage.setItem('pwa_fullscreen_auto','1'); } catch(e){}
-          removeListeners();
-        }
-
-        function removeListeners(){
-          window.removeEventListener('touchstart', enableFullscreenOnce);
-          window.removeEventListener('click', enableFullscreenOnce);
-        }
-
-        window.addEventListener('touchstart', enableFullscreenOnce, {passive:true});
-        window.addEventListener('click', enableFullscreenOnce, {passive:true});
-      })();
-    </script>
   </body>
 </html>

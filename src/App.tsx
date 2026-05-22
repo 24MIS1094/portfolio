@@ -424,17 +424,6 @@ const App = () => {
     setIsWarping(true);
     playEpicSynth();
 
-    // Trigger full screen modes if allowed
-    try {
-      if (document.documentElement.requestFullscreen) {
-        await document.documentElement.requestFullscreen();
-      } else if ((document.documentElement as any).webkitRequestFullscreen) {
-        await (document.documentElement as any).webkitRequestFullscreen();
-      }
-    } catch {
-      // Fullscreen bypassed silently
-    }
-
     // Sequence timing (Accelerated for rapid, energetic warp jump)
     setTimeout(() => {
       setShowShutter(true);
